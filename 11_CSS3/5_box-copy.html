@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <title>box-sizing</title>
+      <style>
+         #banner{width:100px; height:200px; background-color:gold;}
+         #banner >.box1{
+            width:100px; height:100px; background-color:black;
+            border:100px solid #393;
+            margin:20px;
+            box-sizing: border-box;
+            display: inline-block;
+         }
+         #banner >.box2{
+            width:400px; height:300px; background-color:tomato;
+            display: inline-block;
+            margin:20px;
+            border:20px solid #534
+            display: inline-block;
+         }
+
+      </style>
+   </head>
+   <body>
+      <div id="banner">
+         <div class="box1"></div>
+         <div class="box2"></div>
+         <div class="box3"></div>
+      </div>
+   </body>
+</html>
