@@ -2,100 +2,251 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: "맑은 고딕";
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "맑은 고딕";
+    }
 
-        ul,
-        li,
-        ol {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
+    ul,
+    li,
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-        header {
-            width: 1100px;
-            height: 100px;
-            margin: 0 auto;
-            background-color: gold;
-        }
+    header {
+      width: 1100px;
+      height: 100px;
+      margin: 0 auto;
+    }
 
-        #logo {
-            width: 130px;
-            height: 70px;
-            margin: 10px 0px 0 10px;
-            background-color: green;
-            float: left;
-        }
+    #logo {
+      width: 130px;
+      height: 70px;
+      margin: 10px 0px 0 10px;
+      float: left;
+      border-radius: 10%;
+    }
 
-        nav {
-            width: 740px;
-            height: 30px;
-            float: right;
-            background-color: pink;
-            margin: 30px 30px 0 0;
-        }
+    nav {
+      width: 740px;
+      height: 30px;
+      float: right;
+      margin: 30px 30px 0 0;
+    }
 
-        #slider {
-            width: 1100px;
-            height: 450px;
-            margin: 0 auto;
-            background-color: tomato;
-        }
+    nav ul {
+      font-family: "Arial";
+      font-weight: bold;
+      text-decoration-line: none;
+    }
 
-        section {
-            width: 1100px;
-            height: 280px;
-            margin: 0 auto;
-            background-color: cyan;
-        }
+    nav ul li {
+      float: left;
+      margin: 0 30px;
+    }
 
-        article {
-            width: 340px;
-            height: 145px;
-            float: left;
-            margin: 30px 10px;
-            background-color: yellow;
-        }
+    nav ul li a {
+      text-decoration-line: none;
+      color: black;
+    }
 
-        footer {
-            width: 1100px;
-            height: 100px;
-            margin: 0 auto;
-            background-color: #eee;
-        }
+    #slider {
+      width: 1100px;
+      height: 450px;
+      margin: 0 auto;
+    }
 
-        #c {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 8px;
-            color: gray;
-        }
-    </style>
+    .slide {
+      position: absolute;
+      top: 100px;
+      left: 40px;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      animation: slider 12s infinite linear;
+    }
+
+    .slide:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .slide:nth-child(2) {
+      animation-delay: -4s;
+    }
+
+    .slide:nth-child(3) {
+      animation-delay: -8s;
+    }
+
+    .slide:nth-child(4) {
+      animation-delay: -12s;
+    }
+
+    @keyframes slider {
+      0% {
+        transform: translateX(0);
+      }
+
+      26% {
+        transform: translateX(0);
+      }
+
+      33% {
+        transform: translateX(-100%);
+        animation-timing-function: step-end;
+      }
+
+      93% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    section {
+      width: 1100px;
+      height: 280px;
+      margin: 0 auto;
+    }
+
+    article {
+      width: 340px;
+      height: 145px;
+      float: left;
+      margin: 30px 10px;
+    }
+
+    article h3 {
+      font-size: 16px;
+      width: 100%;
+      height: 30px;
+      margin: 0;
+    }
+
+    article img {
+      margin: 0 10px 0 10px;
+      float: left;
+    }
+
+    article h4 {
+      font-size: 14px;
+      height: 30px;
+      margin: 0;
+    }
+
+    article p {
+      font-family: "돋움";
+      font-size: 12px;
+      color: #666;
+    }
+
+    article .icon {
+      width: 100px;
+      height: 75px;
+      float: left;
+      margin: 0 0 0 5px;
+    }
+
+    article .icon img {
+      float: left;
+      margin: 0 0 0 20px;
+    }
+
+    article .icon span {
+      width: 100%;
+      float: left;
+      text-align: center;
+      font-size: 12px;
+      margin: 10px 0 0 0;
+      display: block;
+    }
+
+    footer {
+      width: 1100px;
+      height: 100px;
+      margin: 0 auto;
+      background-color: #eee;
+    }
+
+    footer img {
+      float: left;
+      margin: 20px 0 0 20px;
+      mix-blend-mode: multiply;
+    }
+
+    footer p {
+      font-family: "돋움";
+      font-size: 12px;
+      color: #666;
+      margin: 45px 100px 0 0;
+      float: right;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <div id="logo"></div>
-        <nav></nav>
-    </header>
-    <div id="slider"></div>
-    <section>
-        <article>NEWS</article>
-        <article>랜드로버 모델 살펴보기</article>
-        <article></article>
-    </section>
-    <footer>
-        <div id="logo2"></div>
-        <div id="c">Jaguar Land Rover Limited: Registered office: Abbey Road, Whitley CV3 4LF, Registered in England No:
-            1672070</div>
-    </footer>
+  <header>
+    <div id="logo"><img src="img\logo.jpg" /></div>
+    <nav>
+      <ul>
+        <li><a href="#">VEHCLES</a></li>
+        <li><a href="#">PRICE</a></li>
+        <li><a href="#">OFFERS</a></li>
+        <li><a href="#">SECONDHSND CAR</a></li>
+        <li><a href="#">OWNERSHIP</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="slider">
+    <div class="slide"><img src="img/2.jpg"></div>
+    <div class="slide"><img src="img/1.jpg"></div>
+    <div class="slide"><img src="img/3.jpg"></div>
+    <div class="slide"><img src="img/3_1.jpg"></div>
+  </div>
+
+  <section>
+    <article>
+      <h3>NEWS</h3>
+      <a href="#"><img src="img/4.jpg"></a>
+      <h4>Discovery 5</h4>
+      <p>랜드로버가 만든 정통 SUV, 디스커버리의 신형 모델이 다음 달 공개된다.</p>
+    </article>
+    <article>
+      <h3>랜드로버 모델 살펴보기</h3>
+      <a href="#"><img src="img/8.jpg"></a>
+    </article>
+    <article>
+      <h3>고객지원</h3>
+      <div class="icon">
+        <a href="#"><img src="img/icon3.jpg"></a>
+        <span>시승신청</span>
+      </div>
+      <div class="icon">
+        <a href="#"><img src="img/icon4.jpg"></a>
+        <span>뉴스레터 신청</span>
+      </div>
+      <div class="icon">
+        <a href="#"><img src="img/icon5.jpg"></a>
+        <span>전시장 찾기</span>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <img src="img/logo.jpg">
+    <p>Jaguar Land Rover Limited: Registered office: Abbey Road, Whitley,
+      Coventry CV3 4LF. Registered in England No: 1672070</p>
+  </footer>
 </body>
 
 </html>
