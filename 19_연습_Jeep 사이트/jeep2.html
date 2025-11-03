@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol,
+        li {
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+            float: left;
+            display: inline-block;
+            font-family: "맑은 고딕", Courier, monospace;
+            font-size: 95%;
+        }
+
+        li::after {
+            content: "|";
+            margin: 0 10px;
+        }
+
+        li:last-child::after {
+            content: none;
+        }
+
+        #login a {
+            text-decoration: none;
+            color: #666;
+        }
+
+        header {
+            width: 1185px;
+            height: 160px;
+            margin: 0 auto;
+        }
+
+        #logo {
+            width: 220px;
+            height: 100px;
+            float: inline-start;
+            margin: 50px 0 0 0;
+        }
+
+        #login {
+            width: 295px;
+            height: 30px;
+            margin: 20px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        nav {
+            width: 920px;
+            height: 40px;
+            float: left;
+            margin: -30px 0px 0px 250px;
+        }
+
+        nav a {
+            display: inline-block;
+            font-family: "맑은 고딕", Courier, monospace;
+            float: left;
+            font-size: 20px;
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 5px 30px;
+        }
+
+        #slider {
+            width: 1475px;
+            height: 560px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            width: 1475px;
+            height: 560px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            animation: slider 12s infinite linear;
+        }
+
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            animation-delay: -4s;
+        }
+
+        .slide:nth-child(3) {
+            animation-delay: -8s;
+        }
+
+        .slide:nth-child(4) {
+            animation-delay: -12s;
+        }
+
+        @keyframes slider {
+            0% {
+                transform: translateX(0);
+            }
+
+            26% {
+                transform: translateX(0);
+            }
+
+            33% {
+                transform: translateX(-100%);
+                animation-timing-function: step-end;
+            }
+
+            93% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        section {
+            width: 1280px;
+            height: 405px;
+            margin: 0 auto;
+            background-color: skyblue;
+        }
+
+        #news {
+            width: 345px;
+            height: 155px;
+            float: left;
+            background-color: dodgerblue;
+            margin: 30px 20px 10px 30px;
+        }
+
+        h6 {
+            font-size: 14px;
+            margin: 10px 0 0 10px;
+            font-family: "맑은 고딕";
+        }
+
+        #icon {
+            width: 455px;
+            height: 155px;
+            float: left;
+            background-color: orangered;
+            margin: 30px 20px 10px 30px;
+        }
+
+        .box {
+            width: 75px;
+            height: 75px;
+            float: left;
+            background-color: yellow;
+            margin: 40px 8px 40px 8px;
+        }
+
+        #brand {
+            width: 330px;
+            height: 155px;
+            float: left;
+            background-color: green;
+            margin: 30px 20px 10px 20px;
+        }
+
+        #promotion {
+            width: 345px;
+            height: 150px;
+            float: left;
+            background-color: rgb(19, 59, 59);
+            margin: 20px 20px 20px 30px;
+        }
+
+        #camp {
+            width: 455px;
+            height: 150px;
+            float: left;
+            background-color: rgba(212, 73, 212, 0.801);
+            margin: 20px 20px 20px 30px;
+        }
+
+        #store {
+            width: 330px;
+            height: 150px;
+            float: left;
+            background-color: rgb(255, 0, 106);
+            margin: 20px 20px 20px 20px;
+        }
+
+        footer {
+            width: 100%;
+            height: 145px;
+            border-top: gray 1px solid;
+        }
+
+        #box {
+            width: 1240px;
+            height: 130px;
+            margin: 0 auto;
+            background-color: coral;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <header>
+        <div id="logo"><img src="img\logo_img.jpg" </div>
+            <div id="login">
+                <ol>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">Q & A</a></li>
+                    <li><a href="#">LANGUAGE</a></li>
+                </ol>
+            </div>
+            <nav>
+                <div><a href=#">Mode</a></div>
+                <div><a href=#">Purchase Inquiry</a></div>
+                <div><a href=#">Driving</a></div>
+                <div><a href=#">performance</a></div>
+                <div><a href=#">Services</a></div>
+                <div><a href=#">Event</a></div>
+            </nav>
+    </header>
+
+    <div id="slider">
+        <slider>
+            <div class="slide"><img src="img\1.jpg" alt=""></div>
+            <div class="slide"><img src="img\2.jpg" alt=""></div>
+            <div class="slide"><img src="img\3.jpg" alt=""></div>
+            <div class="slide"><img src="img\4.jpg" alt=""></div>
+        </slider>
+    </div>
+
+    </slider>
+
+    <section>
+        <div id="news">
+            <h2><img src="img\+.jpg" style="float:right; scale: 70%;" ;>NEWS</h2>
+            <h5>FCA 코리아, '2017' FCA 서비스 스킬...</h5>
+            <h5>지프, '랭글러 언리미티드 랭글러 JK 에디션...'</h5>
+            <h5>가장 스릴 넘치는 '지프 드라이브 스루'가...</h5>
+        </div>
+        <div id="icon">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+        <div id="brand"></div>
+        <div id="promotion"></div>
+        <div id="camp"></div>
+        <div id="store"></div>
+
+    </section>
+
+    <footer>
+        <div id="box">ⓒ 2016 Fiat Chrysler Automobiles (FCA). All Rights Reserved.
+            Chrysler, Jeep 및 FIAT 로고는 Fiat Chrysler Automobiles (FCA)의 등록 상표입니다.</div>
+    </footer>
+</body>
+
+</html>
