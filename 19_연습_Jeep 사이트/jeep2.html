@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Title</title>
     <style>
-        * {margin: 0;
-            padding: 0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        a {text-decoration:none;}
+        a {
+            text-decoration: none;
+        }
 
-        ul, ol, li {
+        ul,
+        ol,
+        li {
             text-decoration: none;
             margin: 0;
             padding: 0;
@@ -64,7 +71,6 @@
             float: left;
             margin: -40px 0px 0px 250px;
             display: inline-block;
-
         }
 
         nav a {
@@ -76,7 +82,9 @@
             text-decoration: none;
         }
 
-        nav > ul > li > a:hover {color:crimson;}
+        nav>ul>li>a:hover {
+            color: crimson;
+        }
 
         nav li::after {
             content: "";
@@ -86,6 +94,7 @@
         nav li:last-child::after {
             content: none;
         }
+
         #slider {
             width: 1475px;
             height: 560px;
@@ -94,7 +103,7 @@
             position: relative;
         }
 
-        #slider > img {
+        #slider>img {
             width: 100%;
             height: 100%;
         }
@@ -126,16 +135,20 @@
             0% {
                 transform: translateX(0);
             }
+
             26% {
                 transform: translateX(0);
             }
+
             33% {
                 transform: translateX(-100%);
                 animation-timing-function: step-end;
             }
+
             93% {
                 transform: translateX(100%);
             }
+
             100% {
                 transform: translateX(0);
             }
@@ -148,7 +161,9 @@
             background-color: skyblue;
         }
 
-        section h3 {margin-bottom: 10px;}
+        section h3 {
+            margin-bottom: 10px;
+        }
 
         #news {
             width: 345px;
@@ -157,17 +172,24 @@
             margin: 30px 20px 10px 30px;
         }
 
-        #news img{block-size: 20%;}
+        #news img {
+            block-size: 20%;
+        }
 
-        #news table tr td {font-size:14px; line-height:1.8; color:black;}
-        
+        #news table tr td {
+            font-size: 14px;
+            line-height: 1.8;
+            color: black;
+        }
+
         #icon {
             width: 455px;
             height: 155px;
             float: left;
-            margin: 30px 10px 10px 0px;}
+            margin: 30px 10px 10px 0px;
+        }
 
-        #icon >.iconbox {
+        #icon>.iconbox {
             width: 75px;
             height: 75px;
             float: left;
@@ -176,8 +198,17 @@
             margin: 40px 10px 0 0px;
             display: inline-block;
         }
-        #icon .iconbox a img {width:75px;}
-        #icon >.iconbox > span > a {color:#666; display:inline-block; width:100%; text-align: center;}
+
+        #icon .iconbox a img {
+            width: 75px;
+        }
+
+        #icon>.iconbox>span>a {
+            color: #666;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
 
         #brand {
             width: 330px;
@@ -187,7 +218,9 @@
             margin: 30px 20px 10px 20px;
         }
 
-        #brand p {font-size:13px;}
+        #brand p {
+            font-size: 13px;
+        }
 
         #promotion {
             width: 345px;
@@ -226,8 +259,6 @@
             background-color: coral;
         }
     </style>
-
-
 </head>
 
 <body>
@@ -253,7 +284,6 @@
                 </ul>
             </nav>
     </header>
-
     <div id="slider">
         <slider>
             <li class="slide"><img src="img\1.jpg" alt=""></li>
@@ -262,20 +292,22 @@
             <li class="slide"><img src="img\4.jpg" alt=""></li>
         </slider>
     </div>
-
     </slider>
-
     <section>
-        <div id="news">
-            <img src="img\+.jpg" style="float:right; scale: 70%;">
+        <div id="news"> <img src="img\+.jpg" style="float:right; scale: 70%;">
             <h3>NEWS</h3>
             <table>
-                <tr><td><a href="#">FCA 코리아, '2017' FCA 서비스 스킬...</a></td></tr>
-                <tr><td><a href="#">지프, '랭글러 언리미티드 랭글러 JK 에디션...'</a></td></tr><a href="#">
-                <tr><td><a href="#">가장 스릴 넘치는 '지프 드라이브 스루'가...</a></td></tr>
+                <tr>
+                    <td><a href="#">FCA 코리아, '2017' FCA 서비스 스킬...</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">지프, '랭글러 언리미티드 랭글러 JK 에디션...'</a></td>
+                </tr><a href="#">
+                    <tr>
+                        <td><a href="#">가장 스릴 넘치는 '지프 드라이브 스루'가...</a></td>
+                    </tr>
             </table>
         </div>
-        
         <div id="icon">
             <div class="iconbox"><span><a href="#"><img src="img\icon_img1.jpg">카탈로그</span></a></div>
             <div class="iconbox"><span><a href="#"><img src="img\icon_img2.jpg">견적</span></a></div>
@@ -283,32 +315,27 @@
             <div class="iconbox"><span><a href="#"><img src="img\icon_img4.jpg">시승예약</span></a></div>
             <div class="iconbox"><span><a href="#"><img src="img\icon_img5.jpg">A/S</span></a></div>
         </div>
-
         <div id="brand">
             <h3>Brand Stroy</h3>
-            <p><a href="#">모험은 모든 Jeep®가 보유한 DNA의 일부입니다. 인류가 호기심에 이끌려 천지 끝까지 탐험을 멈추지 않는 한 Jeep®는 계속해서 인류가 그 한계를 뛰어 넘도록 영감을 줄 것입니다.</a></p>
+            <p><a href="#">모험은 모든 Jeep®가 보유한 DNA의 일부입니다. 인류가 호기심에 이끌려 천지 끝까지 탐험을 멈추지 않는 한 Jeep®는 계속해서 인류가 그 한계를 뛰어 넘도록
+                    영감을 줄 것입니다.</a></p>
             <h4><a href="#">마이크 맨리 Jeep® 브랜드 대표이사 및 CEO</a></h4>
         </div>
-
         <div id="promotion">
             <h3>이달의 프로모션</h3>
-            <<p><a href="#">JEEP에서 마련한 최상의 구매 혜택을 소개해드립니다. 내게 딱 맞는 조건대로 부담 없이 선택하세요.</a></p>
-            <a href="#"><img src="img\promotion_img.jpg" alt="프로모션"></a>
+            <<p><a href="#">JEEP에서 마련한 최상의 구매 혜택을 소개해드립니다. 내게 딱 맞는 조건대로 부담 없이 선택하세요.</a></p> <a href="#"><img
+                        src="img\promotion_img.jpg" alt="프로모션"></a>
         </div>
-
         <div id="camp">
             <h3>JEECAMP</h3>
-            <p><a href="#">JEEP를 구매해주신 고객분들을 초대하여 서로의 정보를 교환 하고 친목을 다질수 있는 캠프 입니다.</a></p>
-            <a href="#"><img src="img\camp_img.jpg" alt="캠프"></a>
+            <p><a href="#">JEEP를 구매해주신 고객분들을 초대하여 서로의 정보를 교환 하고 친목을 다질수 있는 캠프 입니다.</a></p> <a href="#"><img
+                    src="img\camp_img.jpg" alt="캠프"></a>
         </div>
-
         <div id="store">
             <h3>매장및 서비스센터</h3>
-            <p><a href="#">JEEP의 매장과 서비스센터를 안내해 드립니다.</a></p>
-            <a href="#"><img src="img\ser_img.jpg" alt="매장"></a>
+            <p><a href="#">JEEP의 매장과 서비스센터를 안내해 드립니다.</a></p> <a href="#"><img src="img\ser_img.jpg" alt="매장"></a>
         </div>
     </section>
-
     <footer>
         <div id="box">
             <ul>
@@ -319,14 +346,10 @@
                 <li><a href="#">SITEMAP</a></li>
                 <li><a href="#">개인정보 처리방침</a></li>
                 <li><a href="#">Fiat Chysler Automobiles (FCA)</a></li>
-                <li><a href="#">Chrysler</a></li>\
-                <li><a href="#">FIAT®</a></li>
+                <li><a href="#">Chrysler</a></li>\ <li><a href="#">FIAT®</a></li>
             </ul>
-            
-            <p>
-            ⓒ 2016 Fiat Chrysler Automobiles (FCA). All Rights Reserved.<br>
-            Chrysler, Jeep 및 FIAT 로고는 Fiat Chrysler Automobiles (FCA)의 등록 상표입니다.
-            </p>
+            <p> ⓒ 2016 Fiat Chrysler Automobiles (FCA). All Rights Reserved.<br> Chrysler, Jeep 및 FIAT 로고는 Fiat Chrysler
+                Automobiles (FCA)의 등록 상표입니다. </p>
         </div>
     </footer>
 </body>

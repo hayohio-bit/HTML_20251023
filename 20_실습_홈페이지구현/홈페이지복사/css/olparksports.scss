@@ -1,0 +1,42 @@
+@import "mixin";
+:root{
+    --color1 : #2A54C3; 
+    --sco1 : #2A54C3;
+    --sco2 : #0D3190; //강조
+    --sco3 : rgba(13,49,144,.4); //그림자
+}
+::selection {background: #2A54C3;color:#fff;}
+.gnb_area{
+    .logo .link{background-image: url("../img/olparksports/logo.svg"); width: 33.6rem;}
+}
+
+// 이용안내 > 강습장 출입안내
+.enter_info{
+    margin-bottom: 6rem;
+    .group{
+        background-color: #F2F3F8; border-radius: 2rem; margin-bottom: 4rem; padding: 5rem; display: flex; align-items: center; position: relative;
+        &::before{content: ''; width: 4rem; height: 4rem; border-radius: 50%; background-color: #666; position: absolute; left: 50%; transform: translateX(-50%); bottom: -2rem;}
+        &::after{content: ''; font-family: 'xeicon'; width: 4rem; height: 4rem; line-height: 4rem; font-size: 2rem; font-weight: 700; text-align: center; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); bottom: -2.2rem;}
+        .img_box{width: 24rem; border-radius: 1rem; overflow: hidden;}
+        .txt_box{
+            padding-left: 5rem;width: 100%;
+            .ti{
+                font-size: 2.2rem; font-weight: 700; color: #151515; margin-bottom: 1rem;
+                .num{color: #3169C4; margin-right: 1.2rem;}
+            }
+        }
+        &:last-child{
+            &::before,
+            &::after{display: none;}
+        }
+    }
+}
+
+@media (max-width:$mobile){ //767이하
+	.gnb_area .logo .link{width:29rem;}
+    .enter_info .group{
+        padding: 4rem 3rem; display: block;
+        .txt_box{padding-left: 0; margin-top: 2rem;}
+    }
+
+}
