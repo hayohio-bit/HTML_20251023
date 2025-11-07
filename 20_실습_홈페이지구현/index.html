@@ -1,6 +1,7 @@
 <!-- https://www.ksponco.or.kr/sports/olparksports 도큐멘트 복사함-->
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,305 +10,2775 @@
     <meta name="description" content="올림픽공원스포츠센터 홈페이지 입니다." />
     <title>올림픽공원스포츠센터 홈페이지 입니다.</title>
     <style>
-    #modalLayer {position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); display: block; z-index: 1000;}/* 팝업시 배경 제어하는 부분*/
-    .modal_popup {position: relative; max-width: 400px; margin: 100px auto; background:transparent; padding: 0px; border-radius: 10px; color: white;}
-    #popupToggle:checked ~ #modalLayer {display: none;}
-    #popupToggle {display: none;} .custom-checkbox-label {cursor: pointer; user-select: none; font-size: 17px; display: inline-flex; align-items: center; gap: 8px; position: relative;}
-    /* 체크박스 숨기기 */
-    .custom-checkbox-label input[type="checkbox"] { position: absolute; opacity: 0; width: 18px; height: 18px; margin: 0; cursor: pointer;}
-    /* 원형 박스 */
-    .custom-checkbox-label span::before { content: ''; display: inline-block; width: 18px; height: 18px; border: 2px solid #666; border-radius: 50%; box-sizing: border-box; background-color: white; margin-right: 8px; vertical-align: middle;}
-    /* 체크 표시(✔️) */
-    .custom-checkbox-label input[type="checkbox"]:checked + span::after { content: '🗸'; color: #ff0077; font-size: 25px; font-weight: bold; position: absolute; left: 3px; top: -5px;}
-    .modal_popup img {border-radius: 45px; /* 원하는 만큼 둥글게 */
-    display: block; /* 이미지 주변 여백 제거용 */
-    max-width: 100%;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Noto Sans KR', Arial, sans-serif;
+        background: #fff;
+        }
+
+        #modalLayer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: block;
+            z-index: 1000;
+        }
+
+        /* 팝업시 배경 제어하는 부분*/
+        .modal_popup {
+            position: relative;
+            max-width: 400px;
+            margin: 100px auto;
+            background: transparent;
+            padding: 0px;
+            border-radius: 10px;
+            color: white;
+        }
+
+        #popupToggle:checked~#modalLayer {
+            display: none;
+        }
+
+        #popupToggle {
+            display: none;
+        }
+
+        .custom-checkbox-label {
+            cursor: pointer;
+            user-select: none;
+            font-size: 17px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        /* 체크박스 숨기기 */
+        .custom-checkbox-label input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* 원형 박스 */
+        .custom-checkbox-label span::before {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #666;
+            border-radius: 50%;
+            box-sizing: border-box;
+            background-color: white;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* 체크 표시(✔️) */
+        .custom-checkbox-label input[type="checkbox"]:checked+span::after {
+            content: '🗸';
+            color: #ff0077;
+            font-size: 25px;
+            font-weight: bold;
+            position: absolute;
+            left: 3px;
+            top: -5px;
+        }
+
+        .modal_popup img {
+            border-radius: 45px;
+            /* 원하는 만큼 둥글게 */
+            display: block;
+            /* 이미지 주변 여백 제거용 */
+            max-width: 100%;
+        }
+
+        .popup_close_wrap {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* 체크박스와 닫기 버튼 사이 간격 */
+            justify-content: flex-end;
+            margin: 0px 15px;
+        }
+
+        /* 오른쪽 정렬, 필요시 flex-start나 center로 바꿀 수 있음 */
+
+        .popup_close_btn {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 10px 0px;
+            font-size: 25px;
+        }
+
+        .header {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 7;
+            width: 100%;
+            background: #fff;
+        }
+
+        .header .container {
+            position: static;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+        @charset "UTF-8";
+/* ===========================================================================================
+basic style reset
+=========================================================================================== */
+:root { --color1: #3e77c6; }
+
+html { position: relative; height: 100vh; font-size: 10px; -webkit-box-sizing: border-box; box-sizing: border-box; overflow-x: hidden; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+
+*, ::after, ::before { -webkit-box-sizing: inherit; box-sizing: inherit; }
+
+body { margin: 0; padding: 0; font-size: 1.6rem; letter-spacing: -.05em; font-weight: 400; font-family: 'Spoqa Han Sans Neo','Noto Sans KR','Malgun Gothic','맑은 고딕',Dotum,'돋움',sans-serif; line-height: 1.25; color: #46464a; }
+
+dd, dl, dt, li, ol, ul { margin: 0; padding: 0; list-style: none; }
+
+h1, h2, h3, h4, h5, h6, p { margin: 0; padding: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img { border: 0; vertical-align: middle; font-size: 0; max-width: 100%; image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; -ms-interpolation-mode: nearest-neighbor; }
+
+table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+
+caption, legend { width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+
+input, select, textarea { color: #222; }
+
+input, select { vertical-align: middle; }
+
+input::-moz-placeholder { color: #222; opacity: 1; }
+
+input:-ms-input-placeholder { color: #222; }
+
+input::-webkit-input-placeholder { color: #222; }
+
+input[type=password], input[type=text], select { padding: .6rem 1.2rem; min-height: 3.7rem; font-size: 1.6rem; line-height: 1.42857143; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc; -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; }
+
+input[type=password]:focus, input[type=text]:focus, select:focus, textarea:focus { border-color: #555; }
+
+input[disabled], input[readonly] { background-color: #eee; color: #999; opacity: 1; }
+
+input[disabled] { cursor: not-allowed; }
+
+address, em, i { font-style: normal; }
+
+button { color: inherit; border: 0; padding: 0; background: 0 0; cursor: pointer; }
+
+hr { margin: 0; border: none; padding: 0; display: block; }
+
+figcaption, figure, form { padding: 0; margin: 0; }
+
+fieldset { border: none; padding: 0; margin: 0; }
+
+input[type=submit] { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section { display: block; }
+
+button, input, optgroup, pre, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-weight: inherit; margin: 0; }
+
+iframe { border: 0; }
+
+/* ===========================================================================================
+skip navigation
+=========================================================================================== */
+#skipNav { color: #fff; position: absolute; left: 0; top: 0; width: 150px; z-index: 1000; text-align: center; }
+
+#skipNav a { opacity: 0; position: absolute; left: 0; top: 0; display: block; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.6); -webkit-transform: translateY(-50px); transform: translateY(-50px); -webkit-transition: all .3s ease; transition: all .3s ease; font-size: 14px; }
+
+#skipNav a:active, #skipNav a:focus, #skipNav a:hover { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+
+/* ===========================================================================================
+user defined style
+=========================================================================================== */
+.ic_new_window:hover, .ic_download:hover { text-decoration: underline; text-underline-position: under; }
+
+.ic_new_window::after, .ic_download::after { display: inline-block; font-family: 'xeicon'; content: '\e980'; font-size: 1.5rem; margin-left: .3rem; margin-right: .3rem; font-weight: 300; }
+
+.ic_download::after { content: '\eb7c'; }
+
+.mobile, .pad { display: block; }
+
+.txt-left, .txt_left { text-align: left !important; }
+
+.txt-right, .txt_right { text-align: right !important; }
+
+.txt-center, .txt_center { text-align: center !important; }
+
+.vertical { display: inline-block; vertical-align: middle; }
+
+.sr_only, .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+
+.indent { margin-left: 2rem !important; }
+
+.indent2 { margin-left: 1rem !important; }
+
+.outdent { margin-left: -2rem; }
+
+.w5 { width: 5% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 10% !important; flex: 0 0 10% !important; }
+
+.w6 { width: 6% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 10% !important; flex: 0 0 10% !important; }
+
+.w7 { width: 7% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 10% !important; flex: 0 0 10% !important; }
+
+.w8 { width: 8% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 10% !important; flex: 0 0 10% !important; }
+
+.w9 { width: 9% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 10% !important; flex: 0 0 10% !important; }
+
+.w10 { width: 10% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 10% !important; flex: 0 0 10% !important; }
+
+.w15 { width: 15% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 15% !important; flex: 0 0 15% !important; }
+
+.w20 { width: 20% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 20% !important; flex: 0 0 20% !important; }
+
+.w25 { width: 25% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 25% !important; flex: 0 0 25% !important; }
+
+.w30 { width: 30% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 30% !important; flex: 0 0 30% !important; }
+
+.w35 { width: 35% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 35% !important; flex: 0 0 35% !important; }
+
+.w40 { width: 40% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 40% !important; flex: 0 0 40% !important; }
+
+.w45 { width: 45% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 45% !important; flex: 0 0 45% !important; }
+
+.w50 { width: 50% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 50% !important; flex: 0 0 50% !important; }
+
+.w55 { width: 55% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 55% !important; flex: 0 0 55% !important; }
+
+.w60 { width: 60% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 60% !important; flex: 0 0 60% !important; }
+
+.w65 { width: 65% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 65% !important; flex: 0 0 65% !important; }
+
+.w70 { width: 70% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 70% !important; flex: 0 0 70% !important; }
+
+.w75 { width: 75% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 75% !important; flex: 0 0 75% !important; }
+
+.w80 { width: 80% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 80% !important; flex: 0 0 80% !important; }
+
+.w85 { width: 85% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 85% !important; flex: 0 0 85% !important; }
+
+.w90 { width: 90% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 90% !important; flex: 0 0 90% !important; }
+
+.w95 { width: 95% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 95% !important; flex: 0 0 95% !important; }
+
+.w100 { width: 100% !important; -webkit-box-flex: 0 !important; -ms-flex: 0 0 100% !important; flex: 0 0 100% !important; }
+
+.ml0 { margin-left: 0 !important; }
+
+.ml5 { margin-left: 0.5rem !important; }
+
+.ml10 { margin-left: 1rem !important; }
+
+.ml20 { margin-left: 2rem !important; }
+
+.ml30 { margin-left: 3rem !important; }
+
+.ml40 { margin-left: 4rem !important; }
+
+.ml50 { margin-left: 5rem !important; }
+
+.mt0 { margin-top: 0 !important; }
+
+.mt5 { margin-top: 0.5rem !important; }
+
+.mt10 { margin-top: 1rem !important; }
+
+.mt20 { margin-top: 2rem !important; }
+
+.mt30 { margin-top: 3rem !important; }
+
+.mt40 { margin-top: 4rem !important; }
+
+.mt50 { margin-top: 5rem !important; }
+
+.mr0 { margin-right: 0 !important; }
+
+.mr5 { margin-right: 0.5rem !important; }
+
+.mr10 { margin-right: 1rem !important; }
+
+.mr20 { margin-right: 2rem !important; }
+
+.mr30 { margin-right: 3rem !important; }
+
+.mr40 { margin-right: 4rem !important; }
+
+.mr50 { margin-right: 5rem !important; }
+
+.mb0 { margin-bottom: 0 !important; }
+
+.mb5 { margin-bottom: 0.5rem !important; }
+
+.mb10 { margin-bottom: 1rem !important; }
+
+.mb20 { margin-bottom: 2rem !important; }
+
+.mb30 { margin-bottom: 3rem !important; }
+
+.mb40 { margin-bottom: 4rem !important; }
+
+.mb50 { margin-bottom: 5rem !important; }
+
+.mb60 { margin-bottom: 6rem !important; }
+
+/* ===========================================================================================
+slick slider
+=========================================================================================== */
+.slick-slider { display: block; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -khtml-user-select: none; -ms-touch-action: pan-y; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
+
+.slick-list { position: relative; display: block; overflow: hidden; margin: 0; padding: 0; }
+
+.slick-list:focus { outline: 0; }
+
+.slick-list.dragging { cursor: pointer; }
+
+.slick-slider .slick-list, .slick-slider .slick-track { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+
+.slick-track { position: relative; top: 0; left: 0; display: block; margin-left: auto; margin-right: auto; }
+
+.slick-track:after, .slick-track:before { display: table; content: ''; }
+
+.slick-track:after { clear: both; }
+
+.slick-loading .slick-track { visibility: hidden; }
+
+.slick-slide { display: none; float: left; height: 100%; min-height: 1px; }
+
+[dir=rtl] .slick-slide { float: right; }
+
+.slick-slide img { display: block; margin: 0 auto; }
+
+.slick-slide.slick-loading img { display: none; }
+
+/*.slick-slide.dragging img{pointer-events:none}*/
+.slick-initialized .slick-slide { display: block; }
+
+.slick-loading .slick-slide { visibility: hidden; }
+
+.slick-vertical .slick-slide { display: block; height: auto; }
+
+.slick-arrow.slick-hidden { display: none; }
+
+/* ===========================================================================================
+grid style
+=========================================================================================== */
+.row { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -1.5rem; margin-left: -1.5rem; }
+
+.col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 { position: relative; width: 100%; min-height: 1px; padding-right: 1.5rem; padding-left: 1.5rem; }
+
+.col { -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; -webkit-box-flex: 1; flex-grow: 1; max-width: 100%; }
+
+.col-1 { -ms-flex: 0 0 8.333333%; -webkit-box-flex: 0; flex: 0 0 8.333333%; max-width: 8.333333%; }
+
+.col-2 { -ms-flex: 0 0 16.666667%; -webkit-box-flex: 0; flex: 0 0 16.666667%; max-width: 16.666667%; }
+
+.col-3 { -ms-flex: 0 0 25%; -webkit-box-flex: 0; flex: 0 0 25%; max-width: 25%; }
+
+.col-4 { -ms-flex: 0 0 33.333333%; -webkit-box-flex: 0; flex: 0 0 33.333333%; max-width: 33.333333%; }
+
+.col-5 { -ms-flex: 0 0 41.666667%; -webkit-box-flex: 0; flex: 0 0 41.666667%; max-width: 41.666667%; }
+
+.col-6 { -ms-flex: 0 0 50%; -webkit-box-flex: 0; flex: 0 0 50%; max-width: 50%; }
+
+.col-7 { -ms-flex: 0 0 58.333333%; -webkit-box-flex: 0; flex: 0 0 58.333333%; max-width: 58.333333%; }
+
+.col-8 { -ms-flex: 0 0 66.666667%; -webkit-box-flex: 0; flex: 0 0 66.666667%; max-width: 66.666667%; }
+
+.col-9 { -ms-flex: 0 0 75%; -webkit-box-flex: 0; flex: 0 0 75%; max-width: 75%; }
+
+.col-10 { -ms-flex: 0 0 83.333333%; -webkit-box-flex: 0; flex: 0 0 83.333333%; max-width: 83.333333%; }
+
+.col-11 { -ms-flex: 0 0 91.666667%; -webkit-box-flex: 0; flex: 0 0 91.666667%; max-width: 91.666667%; }
+
+.col-12 { -ms-flex: 0 0 100%; -webkit-box-flex: 0; flex: 0 0 100%; max-width: 100%; }
+
+.row-cols-1 > * { -ms-flex: 0 0 100%; -webkit-box-flex: 0; flex: 0 0 100%; max-width: 100%; }
+
+.row-cols-2 > * { -ms-flex: 0 0 50%; -webkit-box-flex: 0; flex: 0 0 50%; max-width: 50%; }
+
+.row-cols-3 > * { -ms-flex: 0 0 33.333333%; -webkit-box-flex: 0; flex: 0 0 33.333333%; max-width: 33.333333%; }
+
+.row-cols-4 > * { -ms-flex: 0 0 25%; -webkit-box-flex: 0; flex: 0 0 25%; max-width: 25%; }
+
+.row-cols-5 > * { -ms-flex: 0 0 20%; -webkit-box-flex: 0; flex: 0 0 20%; max-width: 20%; }
+
+.row-cols-6 > * { -ms-flex: 0 0 16.666667%; -webkit-box-flex: 0; flex: 0 0 16.666667%; max-width: 16.666667%; }
+
+.justify-content-center { -webkit-box-pack: center !important; -ms-flex-pack: center !important; justify-content: center !important; }
+
+.justify-content-around { -ms-flex-pack: distribute !important; justify-content: space-around !important; }
+
+.justify-content-between { -webkit-box-pack: justify !important; -ms-flex-pack: justify !important; justify-content: space-between !important; }
+
+.align-items-center { -webkit-box-align: center !important; -ms-flex-align: center !important; align-items: center !important; }
+
+.no-gutters { margin-right: 0; margin-left: 0; }
+
+.no-gutters > .col, .no-gutters > [class*=col-] { padding-right: 0; padding-left: 0; }
+
+/* ===========================================================================================
+form-row : 여러개의 요소들이 꽉차면서 한줄인 형태
+form-inline : 여러개의 요소를 꽉차지 않으면서 한줄인 형태
+form-control : input
+form-select : select
+=========================================================================================== */
+.form-label { font-weight: 500; word-break: keep-all; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; /*padding-top: 1rem; padding-bottom:.5rem;*/ }
+
+.form-control { display: inline-block; border: 1px solid #ccc; min-height: 3.6rem; }
+
+.form_textbox:focus, .form-select:focus, .form-control:focus { outline: 0; -webkit-box-shadow: 0 0.2rem 0 black; box-shadow: 0 0.2rem 0 black; }
+
+.form-control::-moz-placeholder { color: #222; opacity: 1; }
+
+.form-control:-ms-input-placeholder { color: #222; }
+
+.form-control::-webkit-input-placeholder { color: #222; }
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control { background-color: #eee; opacity: 1; }
+
+.form-control[disabled], fieldset[disabled] .form-control { cursor: not-allowed; }
+
+textarea.form-control { height: auto; resize: vertical; }
+
+.form-term { margin: 0 1rem; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; font-weight: bold; }
+
+.form-select { position: relative; background-color: #fff; }
+
+.form-select { background: #fff url(../img/board/select_arrow.png) right 1.5rem center no-repeat; -webkit-appearance: none; -moz-appearance: none; appearance: none; position: relative; z-index: 1; padding-right: 2rem; }
+
+.form-select::-ms-expand { display: none; }
+
+.form-select.type2 { height: 5rem; border-radius: 1.2rem; }
+
+.form-row { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.form-row ~ .form-row { margin-top: 1rem; }
+
+.form-row .form-select, .form-row .form-control { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; width: 1%; }
+
+.form-inline { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+/* 체크박스, 라디오버튼 */
+.custom-input { position: relative; }
+
+.custom-input input { position: absolute; left: 0; top: 0; opacity: 0; }
+
+.custom-input input + label { display: inline-block; position: relative; padding-left: 2.6rem; margin-right: 2rem; cursor: pointer; }
+
+.custom-input input + label::before, .custom-input input + label::after { position: absolute; left: 0; top: .3rem; }
+
+.custom-input input + label::before { content: ""; width: 2rem; height: 2rem; border: 1px solid #c7c7c7; background-color: #fff; cursor: pointer; border-radius: .4rem; }
+
+.custom-input input[type="radio"] + label::before { border-radius: 50%; }
+
+.custom-input input[type="radio"] + label::after { content: ""; display: block; opacity: 0; width: .7rem; height: .7rem; background-color: #444444; border-radius: 50%; position: absolute; left: .5rem; top: .8rem; z-index: 2; }
+
+.custom-input input[type="checkbox"] + label::after { content: "\e929"; text-align: center; background-color: #444444; border: 1px solid #606060; color: #fff; font-size: 1.8rem; font-family: "xeicon"; z-index: 2; opacity: 0; line-height: 1; width: 2rem; height: 2rem; border-radius: .4rem; }
+
+.custom-input input[disabled] + label::before { background-color: #e5e5e5; border-color: #ddd; }
+
+.custom-input input:focus + label::before { border: 2px solid #606060; }
+
+.custom-input input:checked + label::after { opacity: 1; border-color: #505050; }
+
+.form-floating { position: relative; display: block; }
+
+.form-floating .form-control { width: 100%; }
+
+.form-floating label { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: absolute; left: 1px; top: 1px; right: 1px; bottom: 1px; font-size: 1.4rem; opacity: 1; visibility: visible; -webkit-transition: .2s; transition: .2s; background-color: #fff; padding: .6rem 1rem; }
+
+.form-floating .form-control:focus ~ label { opacity: 0; visibility: hidden; }
+
+.form-floating .form-control:not(:placeholder-shown) ~ label { display: none; }
+
+@media (min-width: 767.98px) { .mobile { display: none; }
+  /* .form-inline{display: inline-flex; .form-select,.form-control{width:auto}         }         */
+  .col-sm { -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; -webkit-box-flex: 1; flex-grow: 1; max-width: 100%; }
+  .col-sm-1 { -ms-flex: 0 0 8.333333%; -webkit-box-flex: 0; flex: 0 0 8.333333%; max-width: 8.333333%; }
+  .col-sm-2 { -ms-flex: 0 0 16.666667%; -webkit-box-flex: 0; flex: 0 0 16.666667%; max-width: 16.666667%; }
+  .col-sm-3 { -ms-flex: 0 0 25%; -webkit-box-flex: 0; flex: 0 0 25%; max-width: 25%; }
+  .col-sm-4 { -ms-flex: 0 0 33.333333%; -webkit-box-flex: 0; flex: 0 0 33.333333%; max-width: 33.333333%; }
+  .col-sm-5 { -ms-flex: 0 0 41.666667%; -webkit-box-flex: 0; flex: 0 0 41.666667%; max-width: 41.666667%; }
+  .col-sm-6 { -ms-flex: 0 0 50%; -webkit-box-flex: 0; flex: 0 0 50%; max-width: 50%; }
+  .col-sm-7 { -ms-flex: 0 0 58.333333%; -webkit-box-flex: 0; flex: 0 0 58.333333%; max-width: 58.333333%; }
+  .col-sm-8 { -ms-flex: 0 0 66.666667%; -webkit-box-flex: 0; flex: 0 0 66.666667%; max-width: 66.666667%; }
+  .col-sm-9 { -ms-flex: 0 0 75%; -webkit-box-flex: 0; flex: 0 0 75%; max-width: 75%; }
+  .col-sm-10 { -ms-flex: 0 0 83.333333%; -webkit-box-flex: 0; flex: 0 0 83.333333%; max-width: 83.333333%; }
+  .col-sm-11 { -ms-flex: 0 0 91.666667%; -webkit-box-flex: 0; flex: 0 0 91.666667%; max-width: 91.666667%; }
+  .col-sm-12 { -ms-flex: 0 0 100%; -webkit-box-flex: 0; flex: 0 0 100%; max-width: 100%; } }
+
+@media (min-width: 1023.98px) { .pad { display: none; }
+  .col-md { -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; -webkit-box-flex: 1; flex-grow: 1; max-width: 100%; }
+  .col-md-1 { -ms-flex: 0 0 8.333333%; -webkit-box-flex: 0; flex: 0 0 8.333333%; max-width: 8.333333%; }
+  .col-md-2 { -ms-flex: 0 0 16.666667%; -webkit-box-flex: 0; flex: 0 0 16.666667%; max-width: 16.666667%; }
+  .col-md-3 { -ms-flex: 0 0 25%; -webkit-box-flex: 0; flex: 0 0 25%; max-width: 25%; }
+  .col-md-4 { -ms-flex: 0 0 33.333333%; -webkit-box-flex: 0; flex: 0 0 33.333333%; max-width: 33.333333%; }
+  .col-md-5 { -ms-flex: 0 0 41.666667%; -webkit-box-flex: 0; flex: 0 0 41.666667%; max-width: 41.666667%; }
+  .col-md-6 { -ms-flex: 0 0 50%; -webkit-box-flex: 0; flex: 0 0 50%; max-width: 50%; }
+  .col-md-7 { -ms-flex: 0 0 58.333333%; -webkit-box-flex: 0; flex: 0 0 58.333333%; max-width: 58.333333%; }
+  .col-md-8 { -ms-flex: 0 0 66.666667%; -webkit-box-flex: 0; flex: 0 0 66.666667%; max-width: 66.666667%; }
+  .col-md-9 { -ms-flex: 0 0 75%; -webkit-box-flex: 0; flex: 0 0 75%; max-width: 75%; }
+  .col-md-10 { -ms-flex: 0 0 83.333333%; -webkit-box-flex: 0; flex: 0 0 83.333333%; max-width: 83.333333%; }
+  .col-md-11 { -ms-flex: 0 0 91.666667%; -webkit-box-flex: 0; flex: 0 0 91.666667%; max-width: 91.666667%; }
+  .col-md-12 { -ms-flex: 0 0 100%; -webkit-box-flex: 0; flex: 0 0 100%; max-width: 100%; } }
+
+/* ===========================================================================================
+print style
+=========================================================================================== */
+@page { size: A4 landscape;
+  margin: 1rem auto; }
+
+@media print { #header, aside, #spot, #side, #quick, .cont-bot, #footer, .snb, .test_wrap, .slave_tab, .header, #snb, .acctoggle, .sub_visual, .breadcrumbs_bar, .cont_info, .footer, .go_top { display: none !important; }
+  .container, .content, .content_section { width: 100% !important; max-width: inherit !important; }
+  .content > .tab_cont { opacity: 1 !important; visibility: visible !important; }
+  .fixed { position: relative !important; }
+  .snb_content_wrap { padding-top: 0 !important; padding-bottom: 0 !important; }
+  .main { margin-top: 0 !important; }
+  /* flex오류 */
+  .board_info .form-row { display: block !important; }
+  .board_search .search_btn { display: inline-block !important; vertical-align: middle; }
+  .board_info .form-row .form-select { width: auto !important; } }
+/*# sourceMappingURL=common.css.map */
+:lang(en) { font-family: 'Play', sans-serif; }
+
+.container { max-width: 1280px; margin: 0 auto; position: relative; }
+
+#wrap { position: relative; }
+
+#wrap::before { content: ''; display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+/* =======================================================================================
+header
+======================================================================================= */
+@-webkit-keyframes dropUp { 0% { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+  100% { -webkit-transform: translateY(0); transform: translateY(0); } }
+@keyframes dropUp { 0% { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+  100% { -webkit-transform: translateY(0); transform: translateY(0); } }
+
+@-webkit-keyframes dropDown { 0% { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+  100% { -webkit-transform: translateY(0); transform: translateY(0); } }
+
+@keyframes dropDown { 0% { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+  100% { -webkit-transform: translateY(0); transform: translateY(0); } }
+
+.header { position: absolute; left: 0; top: 0; z-index: 7; width: 100%; background: #fff; }
+
+.header .container { position: static; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; /*max-width:$wideCont;*/ }
+
+.header.active { -webkit-box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.06); box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.06); }
+
+.header.active .gnb_area { background: #fff; border-bottom: 1px solid #DDD; }
+
+.header.active .topmenu::after { opacity: 1; }
+
+.header.fixed { position: fixed; -webkit-animation: dropDown 0.3s cubic-bezier(0.215, 0.61, 0.355, 1); animation: dropDown 0.3s cubic-bezier(0.215, 0.61, 0.355, 1); -webkit-box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.06); box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.06); }
+
+.header.fixed .gnb_site { display: none; }
+
+.gnb_site { background-color: #2D2D2D; color: #ccc; font-size: 1.4rem; }
+
+.gnb_site .container { height: 4.5rem; }
+
+.gnb_site .xi-angle-down-min { width: 2.2rem; height: 2.2rem; font-size: 1.4rem; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.5); margin-left: 1rem; -webkit-transition: .2s; transition: .2s; }
+
+.gnb_site .site_area { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_site .site_area .list { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_site .site_area .list a { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; font-size: inherit; position: relative; -webkit-transition: .2s; transition: .2s; }
+
+.gnb_site .site_area .list a:hover { color: #fff; }
+
+.gnb_site .site_area .list a ~ a { position: relative; padding-left: 1rem; margin-left: 1rem; }
+
+.gnb_site .site_area .list a ~ a::before { content: ''; display: block; background-color: rgba(255, 255, 255, 0.27); width: 1px; height: 1rem; position: absolute; -webkit-transform: translate(0, -50%); transform: translate(0, -50%); left: 0; top: 50%; }
+
+.gnb_site .site_area .list a:first-child { color: #fff; }
+
+.gnb_site .site_area_mobile { position: relative; display: none; }
+
+.gnb_site .site_area_mobile .title { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 1rem; color: #fff; font-size: 1.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap { width: 37rem; background: #fff; border-radius: 1rem; padding: 2rem; -webkit-box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.24); box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.24); opacity: 0; visibility: hidden; -webkit-transition: 0.2s; transition: 0.2s; color: #000; position: absolute; left: .8rem; top: .8rem; }
+
+.gnb_site .site_area_mobile .list_wrap .represent { border-bottom: 1px solid #E8E8E8; padding-bottom: 2rem; font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.gnb_site .site_area_mobile .list_wrap .represent a { display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.gnb_site .site_area_mobile .list_wrap .represent a span { margin-top: 0.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .represent i { border-color: #DFDFDF; color: #000; }
+
+.gnb_site .site_area_mobile .list_wrap .list { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_site .site_area_mobile .list_wrap ul { -webkit-box-flex: 0; -ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%; }
+
+.gnb_site .site_area_mobile .list_wrap ul li ~ li { margin-top: 1.8rem; }
+
+.gnb_site .site_area_mobile .list_wrap ul a { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; font-size: 1.5rem; font-weight: 500; position: relative; }
+
+.gnb_site .site_area_mobile .list_wrap ul a::before { content: ''; display: block; width: 2.5rem; -webkit-box-flex: 0; -ms-flex: 0 0 2.5rem; flex: 0 0 2.5rem; max-width: 2.5rem; height: 2.5rem; background: url("/img/common/gnb_site_logos.svg") 0 0/2.5rem auto no-repeat; margin-right: 0.5rem; color: inherit; }
+
+.gnb_site .site_area_mobile .list_wrap ul a span { display: inline-block; position: relative; white-space: nowrap; }
+
+.gnb_site .site_area_mobile .list_wrap ul a span::after { content: ""; display: block; width: .5rem; height: .5rem; border-radius: 50%; background: #D80000; -webkit-transform: scale(0); transform: scale(0); -webkit-transition: .2s; transition: .2s; position: absolute; right: -.8rem; top: -.3rem; }
+
+.gnb_site .site_area_mobile .list_wrap ul a:hover span::after { -webkit-transform: scale(1); transform: scale(1); -webkit-transition-delay: .2s; transition-delay: .2s; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(1) a::before { background-position: 0 0rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(2) a::before { background-position: 0 -3.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(3) a::before { background-position: 0 -10.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(4) a::before { background-position: 0 -14rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(5) a::before { background-position: 0 -17.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(6) a::before { background-position: 0 -21rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(7) a::before { background-position: 0 -24.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group1 li:nth-child(8) a::before { background-position: 0 -28rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(1) a::before { background-position: 0 -31.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(2) a::before { background-position: 0 -35rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(3) a::before { background-position: 0 -38.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(4) a::before { background-position: 0 -42rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(5) a::before { background-position: 0 -45.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(6) a::before { background-position: 0 -49rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(7) a::before { background-position: 0 -52.5rem; }
+
+.gnb_site .site_area_mobile .list_wrap .group2 li:nth-child(8) a::before { background-position: 0 -56rem; }
+
+.gnb_site .site_area_mobile.active i { -webkit-transform: rotate(180deg); transform: rotate(180deg); }
+
+.gnb_site .site_area_mobile.active .list_wrap { opacity: 1; visibility: visible; z-index: 12; }
+
+.gnb_site .gnb_util { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.gnb_site .gnb_util .welcome { display: block; margin-right: 1rem; }
+
+.gnb_site .gnb_util a { font-size: 1.5rem; padding: .8rem .4rem; display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_site .gnb_util a i { margin-right: 0.5rem; }
+
+.gnb_site .gnb_util .nav { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_site .gnb_util .nav li ~ li { position: relative; padding-left: 1rem; margin-left: 1rem; }
+
+.gnb_site .gnb_util .nav li ~ li::before { content: ''; display: block; background-color: rgba(255, 255, 255, 0.27); width: 1px; height: 0.8rem; position: absolute; -webkit-transform: translate(0, -50%); transform: translate(0, -50%); left: 0; top: 50%; }
+
+.gnb_site .gnb_util .icon_join, .gnb_site .gnb_util .icon_mypage { width: 1.8rem; height: 2rem; background: url("../img/common/icon_user.svg") 0 0/1.8rem 4rem no-repeat; }
+
+.gnb_site .gnb_util .icon_login { width: 1.7rem; height: 2rem; background: url("../img/common/icon_lock.svg") 0 0/1.7rem 4rem no-repeat; }
+
+.gnb_site .gnb_util .icon_logout { width: 1.7rem; height: 2rem; background: url("../img/common/icon_unlock.svg") 0 0/1.7rem 4rem no-repeat; }
+
+.gnb_area { position: relative; -webkit-transition: .2s; transition: .2s; }
+
+.gnb_area .nav { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_area .logo { padding: 2.6rem 0; height: 10rem; }
+
+.gnb_area .logo .link { background: url("../img/common/logo.svg") 0 0/100% 6.8rem no-repeat; display: block; height: 3.4rem; }
+
+.gnb_area .gnb_wrap { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.gnb_area .btn_wrap { padding-top: 2.5rem; }
+
+.gnb_area .btn_wrap > button { width: 5rem; height: 5rem; border-radius: 50%; display: inline-block; vertical-align: middle; }
+
+.gnb_area .btn_allmenu { margin-left: 1.2rem; background: var(--color1); }
+
+.gnb_area .btn_allmenu .icon { display: block; width: 1.8rem; height: .2rem; background: #fff; position: relative; margin: 0 auto; }
+
+.gnb_area .btn_allmenu .icon::before, .gnb_area .btn_allmenu .icon::after { content: ""; display: block; width: 1.8rem; height: 0.2rem; background: #fff; border-radius: 0.2rem; top: -.7rem; position: absolute; right: 0; }
+
+.gnb_area .btn_allmenu .icon::after { width: 1.8rem; top: .7rem; }
+
+.gnb_area .btn_sch_open { color: #151515; background-color: #F2F3F8; }
+
+.gnb_area .btn_sch_open .xi-search { font-size: 2.4rem; }
+
+.gnb_area .sch_layer { opacity: 0; visibility: hidden; -webkit-transition: 0.3s; transition: 0.3s; position: absolute; left: 0; top: 10rem; z-index: 9; background: #fff; width: 100%; text-align: center; padding: 0; -webkit-box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.12); box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.12); overflow: hidden; }
+
+.gnb_area .sch_layer input[type=text] { border: 0; border-bottom: 3px solid #F2F2F2; color: #727272; font-size: 2.8rem; width: 60rem; padding: 1.5rem 4rem 1.5rem 1.5rem; margin-left: 2rem; }
+
+.gnb_area .sch_layer .btn_sch { font-size: 2.5rem; color: #5D5D5D; -webkit-transform: translateX(-3rem); transform: translateX(-3rem); vertical-align: middle; }
+
+.gnb_area .sch_layer .btn_sch_close { position: absolute; -webkit-transform: translateX(-50%); transform: translateX(-50%); left: 50%; top: 3rem; }
+
+.gnb_area .sch_layer .btn_sch_close i { color: #373737; font-size: 3rem; font-weight: 700; }
+
+.gnb_area .sch_layer.active { opacity: 1; visibility: visible; border-top: 1px solid #E9E9E9; padding: 12rem 0 7rem; }
+
+.topmenu { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.topmenu::after { content: ''; display: block; width: 100%; height: 1px; position: absolute; left: 0; top: 10rem; z-index: 5; background: #E9E9E9; opacity: 0; -webkit-transition: .2s; transition: .2s; }
+
+.topmenu a[target="_blank"]::after { display: inline-block; font-family: 'xeicon'; content: '\e980'; margin-left: .3rem; font-weight: 300; }
+
+.topmenu .depth1 > a { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 3.75rem 4rem; color: #151515; }
+
+.topmenu .depth1 > a span { display: block; white-space: nowrap; font-size: 2rem; font-weight: 700; position: relative; letter-spacing: -.025em; }
+
+.topmenu .depth1 > a span::after { content: ""; display: block; width: .7rem; height: .7rem; border-radius: 50%; background: var(--color1); -webkit-transform: scale(0); transform: scale(0); -webkit-transition: .2s; transition: .2s; position: absolute; right: -1rem; top: -1rem; }
+
+.topmenu .depth1.active > a span::after { -webkit-transform: scale(1.2); transform: scale(1.2); -webkit-transition-delay: .2s; transition-delay: .2s; }
+
+.topmenu .depth1.active .submenu { opacity: 1; visibility: visible; max-height: 100rem; -webkit-transition-delay: .2s; transition-delay: .2s; }
+
+.topmenu .submenu { -webkit-transition: 0.35s, max-height 1.35s cubic-bezier(0.13, 0.67, 0.59, 0.98); transition: 0.35s, max-height 1.35s cubic-bezier(0.13, 0.67, 0.59, 0.98); opacity: 0; visibility: hidden; overflow: hidden; max-height: 0; position: absolute; left: 0; top: 10rem; z-index: 20; width: calc(100% - 7rem); background-color: #fff; text-align: left; -webkit-box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.12); box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.12); border-radius: 0 0 4rem 4rem; }
+
+.topmenu .title_area { width: 1280px; position: absolute; -webkit-transform: translateX(-50%); transform: translateX(-50%); left: 50%; top: auto; margin-top: 4rem; }
+
+.topmenu .title_area .title { font-size: 4.2rem; color: #000; margin-bottom: .5rem; }
+
+.topmenu .title_area em { color: var(--color1); position: relative; font-size: 1.8rem; font-weight: bold; }
+
+.topmenu .depth2 { max-width: 1280px; margin: 4rem auto; position: relative; overflow-y: auto; padding-left: 36rem; display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+
+.topmenu .depth2 > li { -webkit-box-flex: 0; -ms-flex: 0 0 23.2%; flex: 0 0 23.2%; margin-left: 1.8%; position: relative; margin-bottom: 2rem; }
+
+.topmenu .depth2 > li > a { display: block; border: 3px solid #F7F8FA; border-radius: 0.8rem; padding: 1.5rem; font-size: 1.7rem; color: #3b3b3e; font-weight: 500; }
+
+.topmenu .depth2 > li > a:hover { color: var(--color1); border-color: var(--color1); -webkit-transition: .25s; transition: .25s; }
+
+.topmenu .depth2 > li.is-depth3 > a { position: relative; }
+
+.topmenu .depth2 > li.is-depth3 > a::after { display: inline-block; font-family: 'xeicon'; content: '\e942'; font-size: 1.8rem; color: #333; position: absolute; -webkit-transform: translate(0, -50%); transform: translate(0, -50%); right: 2rem; top: 50%; }
+
+.topmenu .depth3 { margin: 1.5rem 0 2.5rem 1rem; }
+
+.topmenu .depth3 > li > a { color: #727272; display: block; padding: .7rem 0 .7rem 1rem; position: relative; }
+
+.topmenu .depth3 > li > a::before { content: ''; display: block; width: .3rem; height: .3rem; position: absolute; left: 0; top: 1.5rem; border-radius: 50%; background-color: #b3bec1; }
+
+.topmenu .depth3 > li > a:hover { color: var(--color1); font-weight: 700; text-decoration: underline; }
+
+.topmenu .depth4 { display: none; }
+
+.topmenu.fullmenu .depth1.on > a { color: var(--color1); }
+
+.topmenu.fullmenu .depth1 > a span::after { -webkit-transform: scale(0); transform: scale(0); }
+
+.topmenu.fullmenu .depth1:hover > a span::after, .topmenu.fullmenu .depth1.on > a span::after { -webkit-transform: scale(1.2); transform: scale(1.2); }
+
+.topmenu.fullmenu .depth1.active .submenu { margin: 3rem 0; -webkit-transition: margin 0.3s, opacity 0.5s, max-height 1.35s cubic-bezier(0.13, 0.67, 0.59, 0.98); transition: margin 0.3s, opacity 0.5s, max-height 1.35s cubic-bezier(0.13, 0.67, 0.59, 0.98); -webkit-transition-delay: .2s; transition-delay: .2s; }
+
+.topmenu.fullmenu .submenu { -webkit-transition: .35s; transition: .35s; width: auto; position: static; left: auto; background-color: transparent; border-top: 0; -webkit-box-shadow: none; box-shadow: none; }
+
+.topmenu.fullmenu .submenu .title_area { display: none; padding: 0; }
+
+.topmenu.fullmenu .submenu .depth2 { padding-left: 2rem; max-width: inherit; display: block; margin-top: 0; margin-bottom: 0; }
+
+.topmenu.fullmenu .submenu .depth2 > li { margin-bottom: 0; -webkit-box-flex: 1; -ms-flex: auto; flex: auto; margin-left: auto; }
+
+.topmenu.fullmenu .submenu .depth2 > li > a { border: 0; }
+
+.topmenu.fullmenu .submenu .depth2 > li.is-depth3 > a:after { display: none; }
+
+.topmenu.fullmenu .submenu .depth3 { display: none; }
+
+.allmenu { display: block; position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 8; padding-left: 7.6rem; }
+
+.allmenu .pop_title { display: block; color: #000; font-size: 4.2rem; margin: 1rem 0 4.3rem; }
+
+.allmenu .pop_eng_title { display: -webkit-box; display: -ms-flexbox; display: flex; width: 7.6rem; height: 100%; background: var(--color1); color: #fff; position: fixed; left: 0; top: 0; -webkit-writing-mode: vertical-lr; -ms-writing-mode: tb-lr; writing-mode: vertical-lr; -webkit-box-align: center; -ms-flex-align: center; align-items: center; font-size: 2.5rem; padding-top: 4.3rem; }
+
+.allmenu .pop_close { display: block; position: absolute; right: 0; top: 0; font-size: 4.1rem; color: #242427; }
+
+.allmenu .header { position: static; }
+
+.allmenu .header .member_area { display: block; }
+
+.allmenu .header .gnb_area .gnb_wrap { display: block; background-color: #fff; position: fixed; left: 7.6rem; top: 4.5rem; right: 0; bottom: 0; z-index: 9; padding-top: 10rem; max-width: none; }
+
+.allmenu .header .gnb_area .gnb_wrap::before { display: none; }
+
+.allmenu .header .gnb_area .gnb_wrap .nav { display: block; max-width: 1400px; margin: 0 auto; position: relative; height: calc(100% - 14.5rem); }
+
+.allmenu .topmenu { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; height: calc(100% - 10rem); overflow: auto; margin: 0 auto; }
+
+.allmenu .topmenu::after { display: none; }
+
+.allmenu .topmenu::-webkit-scrollbar-track { background-color: #f5f5f5; border-radius: 1rem; }
+
+.allmenu .topmenu::-webkit-scrollbar { width: 0.6rem; }
+
+.allmenu .topmenu::-webkit-scrollbar-thumb { background-color: #d5d7dc; border-radius: 1rem; }
+
+.allmenu .topmenu .submenu { opacity: 1; visibility: visible; max-height: inherit; width: 100%; position: static; -webkit-box-shadow: none; box-shadow: none; background: none; }
+
+.allmenu .topmenu .submenu::before { display: none; }
+
+.allmenu .topmenu .depth1 { display: block; position: relative; -webkit-box-flex: 1; -ms-flex: 1 1 16.66%; flex: 1 1 16.66%; max-width: 16.66%; height: 60vmax; }
+
+.allmenu .topmenu .depth1:hover { background: #F7FAF9; }
+
+.allmenu .topmenu .depth1 > a { display: block; font-size: 2.8rem; padding: 1.7rem 1.5rem; margin-left: 0; -webkit-transition: .2s; transition: .2s; }
+
+.allmenu .topmenu .depth1 > a span { font-weight: 700; text-align: left; }
+
+.allmenu .topmenu .depth1:last-child { display: block; }
+
+.allmenu .topmenu .depth2 { display: block; padding-left: 0; margin: 0; }
+
+.allmenu .topmenu .title_area, .allmenu .topmenu .depth1 > a::before { display: none; }
+
+.allmenu .topmenu .depth2 > li { margin-bottom: 0; margin-left: 0; }
+
+.allmenu .topmenu .depth2 > li > a { border: 0; font-size: 1.8rem; }
+
+.allmenu .topmenu .depth3 { margin: 0 0 0 1.5rem; }
+
+.allmenu .sitemap_footer { margin-top: 5rem; }
+
+.allmenu .sitemap_footer .sns_list { margin-bottom: 1rem; }
+
+.allmenu .sitemap_footer .sns_list a { margin-right: 1rem; }
+
+.allmenu .sitemap_footer .sns_list i { font-size: 1.8rem; color: #222; }
+
+.allmenu .sitemap_footer .copyright { color: #757575; }
+
+.main { position: relative; width: 100%; margin-top: 14.5rem; }
+
+.quick { position: fixed; right: 0; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); z-index: 9; width: 11.2rem; border-radius: 1.2rem 0 0 1.2rem; background: #fff; text-align: center; -webkit-box-shadow: -0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.07); box-shadow: -0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.07); border-radius: 1rem 0 0 1rem; overflow: hidden; }
+
+.quick i { display: block; width: 4rem; height: 4rem; margin: 0 auto; background: 0 0 /100% 8rem no-repeat; }
+
+.quick a { display: block; padding: 1.8rem 1rem; -webkit-transition: .2s; transition: .2s; }
+
+.quick span { font-size: 1.5rem; }
+
+.quick .active a, .quick a:hover { background: #333; color: #fff; }
+
+.quick .active a i, .quick a:hover i { background-position: 0 -4rem; }
+
+.acctoggle { position: fixed; left: 0; top: 50%; z-index: 6; -webkit-transform: translateY(-50%); transform: translateY(-50%); border-radius: 0 1.2rem 1.2rem 0; background: #fff; color: #151515; text-align: center; border: 1px solid #EBEBEB; -webkit-box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.07); box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.07); }
+
+.acctoggle button { display: block; padding: 1rem .5rem; min-width: 5rem; min-height: 5rem; position: relative; -webkit-transition: .2s; transition: .2s; }
+
+.acctoggle button i { font-size: 2.4rem; -webkit-transition: .2s; transition: .2s; }
+
+.acctoggle button span { font-size: 1.4rem; color: #fff; }
+
+.acctoggle button::before { content: ''; display: block; width: 0; height: 100%; -webkit-transition: .2s ease; transition: .2s ease; background-color: #666; position: absolute; left: 0; top: 0; }
+
+.acctoggle button ~ button { border-top: 1px solid #e5e5e5; }
+
+.acctoggle button:hover { background: #e5e5e5; /* i{opacity:0;} span{opacity:1;visibility:visible;transition-delay:.1s;} &::before{width:100%;} */ }
+
+.acctoggle button span { opacity: 0; visibility: hidden; -webkit-transition: .2s; transition: .2s; position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.acctoggle .acctoggle_contrast, .acctoggle .acctoggle_sns { border-radius: 0 1.2rem 0 0; }
+
+.acctoggle .acctoggle_fontsize { border-radius: 0 0 1.2rem 0; }
+
+/* =======================================================================================
+go_top
+======================================================================================= */
+.go_top { display: none; width: 5rem; height: 6rem; color: #151515; position: fixed; text-align: center; left: 0; top: 50%; -webkit-transform: translateY(9rem); transform: translateY(9rem); z-index: 8; background: #333; color: #fff; border-radius: 0 1rem 1rem 0; }
+
+.go_top i { font-size: 2.2rem; -webkit-transition: .2s; transition: .2s; }
+
+.go_top span { display: block; font-size: 1.3rem; line-height: 1; }
+
+.go_top:hover i { -webkit-transform: translateY(-0.5rem); transform: translateY(-0.5rem); }
+
+/* =======================================================================================
+footer
+======================================================================================= */
+.footer { position: relative; border-top: 1px solid #ddd; padding: 3rem 0; color: #151515; }
+
+.footer .container { max-width: 1280px; }
+
+.footer .footer_nav_bar { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin-bottom: 2rem; }
+
+.footer .footer_nav a { display: inline-block; padding: 3rem 0; font-size: 1.7rem; }
+
+.footer .footer_nav a ~ a { position: relative; padding-left: 1rem; margin-left: 1rem; }
+
+.footer .footer_nav a ~ a::before { content: ''; display: block; background-color: #c6c6c6; width: 1px; height: 0.8rem; position: absolute; -webkit-transform: translate(0, -50%); transform: translate(0, -50%); left: 0; top: 50%; }
+
+.footer .footer_nav strong { color: var(--color1); }
+
+.footer .footer_cont { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
+
+.footer .cont_left { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
+
+.footer .footer_logo { margin: -2rem 9rem 0 0; }
+
+.footer .footer_logo .link { background: url("../img/common/footer_logo.svg") 0 0/contain no-repeat; display: block; width: 19.6rem; height: 8.3rem; }
+
+.footer .address_group { line-height: 1.8; color: #555; display: block; }
+
+.footer .address_group address strong { color: #151515; }
+
+.footer .address_group address span { display: block; }
+
+.footer .sns_list a ~ a { margin-left: 1.5rem; }
+
+.footer .sns_list i { font-size: 2.8rem; }
+
+.footer .copyright { display: block; }
+
+.footer .relate_site { width: 20.7rem; position: relative; }
+
+.footer .relate_site .title { display: block; padding: 1.4rem 0; border-bottom: 1px solid #707070; }
+
+.footer .relate_site i { font-size: 2rem; position: absolute; -webkit-transform: translate(0, -50%); transform: translate(0, -50%); right: 1rem; top: 50%; -webkit-transition: .3s; transition: .3s; }
+
+.footer .relate_site .list { opacity: 0; visibility: hidden; overflow: hidden; position: absolute; left: auto; bottom: 4.9rem; max-height: 0; background-color: #fff; -webkit-transition: .3s; transition: .3s; width: 100%; z-index: 2; }
+
+.footer .relate_site .list > li { padding: 0; border: 0; text-align: left; }
+
+.footer .relate_site .list > li a { display: block; padding: .3rem 1rem; font-size: 1.4rem; color: #757575; }
+
+.footer .relate_site .list > li a:hover { background-color: #e5e5e5; }
+
+.footer .relate_site.active i { -webkit-transform: translateY(-50%) rotate(180deg); transform: translateY(-50%) rotate(180deg); }
+
+.footer .relate_site.active .list { opacity: 1; visibility: visible; border: 1px solid #e8e8e8; padding: 1rem 0; max-height: 30rem; overflow: auto; }
+
+.footer .relate_site.active .list::-webkit-scrollbar-track { background-color: #f5f5f5; border-radius: 1rem; }
+
+.footer .relate_site.active .list::-webkit-scrollbar { width: 0.6rem; }
+
+.footer .relate_site.active .list::-webkit-scrollbar-thumb { background-color: #d5d7dc; border-radius: 1rem; }
+
+.site_wrap { display: flex; }
+
+/* =======================================================================================
+폰트사이즈
+======================================================================================= */
+.acc_fontsize { font-size: 13px; }
+
+.acc_fontsize .gnb_site .site_area { display: none; }
+
+.acc_fontsize .gnb_site .site_area_mobile { display: block; }
+
+.acc_fontsize .quick a { padding: 1rem 0; }
+
+.acc_fontsize .quick i { display: none; }
+
+/* =======================================================================================
+블랙모드
+======================================================================================= */
+@media (max-width: 1919px) {
+  .topmenu .submenu { width: 100%; }
+}
+@media (max-width:1550px){
+  .quick{display: none;}
+}
+@media (max-width: 1279.98px) { html { font-size: 9px; }
+  .container { padding: 0 1.5rem; }
+  .gnb_site .site_area .list a { letter-spacing: -1px; }
+  .gnb_site .site_area .list a ~ a { padding-left: 0.45rem; margin-left: 0.45rem; }
+  .gnb_site .gnb_util .text { display: none; }
+  .gnb_site .gnb_util a { padding-left: 0; padding-right: 0; }
+  .allmenu { padding-left: 0; }
+  .allmenu .header .gnb_area .gnb_wrap { left: 0; padding: 0; }
+  .allmenu .pop_eng_title { display: none; }
+  .submenu .title_area { width: 20%; left: 2rem; -webkit-transform: none; transform: none; }
+  .submenu .title_area .title { font-size: 3rem; }
+  .submenu .title_area p { width: 100%; }
+  .topmenu .depth1 > a { padding: 3.75rem 3rem 3.75rem 1.5rem; }
+  .topmenu .depth1 > a span { font-size: 1.8rem; } }
+
+@media (max-width: 1023.98px) { html.acc_fontsize { font-size: 10px; }
+  .header .topmenu { display: none; }
+  .header.active .topmenu::after { top: 0; }
+  .gnb_site .site_area { display: none; }
+  .gnb_site .site_area_mobile { display: block; }
+  .gnb_area .btn_allmenu { margin-left: 1.2rem; }
+  .gnb_area .pop_close { width: 5rem; height: 5rem; background: var(--color1); }
+  .allmenu .header .gnb_area .gnb_wrap { top: 14.5rem; overflow: visible; }
+  .allmenu .header .gnb_area .gnb_wrap .nav { height: 100%; }
+  .allmenu .pop_title { display: none; }
+  .allmenu .pop_close { right: 1.5rem; top: -7.5rem; border-radius: 50%; background: #333 !important; font-size: 2.4rem; line-height: 4rem; color: #fff; }
+  .allmenu .topmenu { position: relative; display: block; padding: 3rem 0; border-top: 1px solid #e8e8e8; }
+  .allmenu .topmenu .depth1 { position: static; -webkit-box-flex: 1; -ms-flex: 1 1 100%; flex: 1 1 100%; max-width: 100%; margin-left: 0; margin-bottom: 0; height: auto; }
+  .allmenu .topmenu .depth1 > a { border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding: 2.5rem 4.5rem; }
+  .allmenu .topmenu .depth1 > a span { font-weight: 700; font-size: 3.7rem; }
+  .allmenu .topmenu .depth1 > a span::before, .allmenu .topmenu .depth1 > a span::after { display: none; }
+  .allmenu .topmenu .depth1.active > a { position: relative; }
+  .allmenu .topmenu .depth1.active > a::after { content: ""; display: block; width: 1.3rem; height: 0.8rem; background: url("../img/common/select_arrow.png") 0 0/contain no-repeat; position: absolute; -webkit-transform: translate(0, -50%); transform: translate(0, -50%); right: 4rem; top: 50%; border: 0; }
+  .allmenu .topmenu .depth1.active span { color: #111; font-weight: 700; background-color: #fff; }
+  .allmenu .topmenu .depth1.active .submenu { display: block; padding: 0 3rem; max-height: inherit; }
+  .allmenu .topmenu .depth1:hover { background: none; }
+  .allmenu .topmenu.active .depth1 > a { color: #757575; }
+  .allmenu .topmenu .submenu { display: none; background-color: #fff; overflow-y: auto; }
+  .allmenu .topmenu .depth2 > li { -ms-flex-preferred-size: 100%; flex-basis: 100%; }
+  .allmenu .topmenu .depth2 > li.active > a { background-color: var(--color1); color: #fff; }
+  .allmenu .topmenu .depth2 > li.active > .depth3 { display: block; margin: 1rem; }
+  .allmenu .topmenu .depth2 > li.is-depth3 > a::after { display: none; }
+  .allmenu .topmenu .depth2 > li.is-depth3 > a::before { display: inline-block; font-family: 'xeicon'; content: '\e942'; font-size: 1.8rem; position: absolute; right: 1rem; top: 1.7rem; z-index: 2; color: #aaa; -webkit-transition: .2s; transition: .2s; }
+  .allmenu .topmenu .depth2 > li.is-depth3.active > a::before { -webkit-transform: rotate(180deg); transform: rotate(180deg); color: #fff; }
+  .allmenu .topmenu .depth2 > li > a { color: #333; font-size: 2.4rem; }
+  .allmenu .topmenu .depth3 { display: none; font-size: 2rem; }
+  .allmenu .sitemap_footer { display: block; position: fixed; left: 0; right: 0; bottom: 0; background: #fff; text-align: center; padding: 2rem 0; }
+  .allmenu .sitemap_footer .sns_list i { font-size: 2.8rem; }
+  .go_top { right: 0rem; }
+  .sns_list { text-align: center; }
+  .footer .footer_nav { text-align: center; }
+  .footer .footer_nav a { padding-top: 1rem; padding-bottom: 1rem; } }
+
+@media (max-width: 767.98px) { html { font-size: 8px; }
+  html.acc_fontsize { font-size: 9px; }
+  .gnb_area .logo { padding: 3.4rem 0; }
+  .gnb_area .sch_layer input[type=text] { width: 85%; }
+  .footer .footer_nav > li { padding-left: 1rem; margin-left: 1rem; }
+  .footer .footer_nav::after { left: 0; width: 100%; }
+  .footer .footer_cont { display: block; width: 100%; }
+  .footer .cont_left { display: block; }
+  .footer .address_group { text-align: center; }
+  .footer .relate_site { width: 100%; margin-bottom: 3rem; }
+  .footer .site_wrap { width: 100%; } }
+
+.event_foot_pop {
+  background: #776d75;
+  color: #fff;
+  padding-top: 7rem;
+  border-radius: 2rem 2rem 0 0;
+  width: 58.2rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  /*opacity:0;visibility:hidden;transform:translateY(100%);transition:.3s ease; */
+}
+
+.event_foot_pop.fixed {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.event_foot_pop .slick-controls {
+  left: 6.6rem;
+  top: 2.4rem;
+}
+.event_foot_pop .slick-controls .control {
+  margin-left: 3.4rem;
+}
+.event_foot_pop .slick-arrow {
+  right: inherit;
+  top: 1.7rem;
+  color: #fff;
+}
+.event_foot_pop .slick-arrow::before {
+  font-size: 1.8rem;
+}
+.event_foot_pop .slick-prev {
+  left: 3rem;
+}
+.event_foot_pop .slick-next {
+  left: 10.5rem;
+}
+
+
+.main .container {
+  position: relative;
+  width: 128rem;
+  max-width: 100%;
+}
+.main .container::after {
+  display: block;
+  clear: both;
+  width: 100%;
+  height: 0;
+  content: "";
+}
+.main .container .group {
+  margin: 6rem 0;
+  text-align: center;
+}
+.main .container .group .title {
+  display: block;
+  position: relative;
+  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  text-align: left;
+  color: #222;
+}
+.main .container .more {
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+  font-weight: 600;
+  color: #888;
+}
+.main .container .more::before {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: #888;
+  content: "";
+}
+.main .container .more::after {
+  margin-left: 0.5rem;
+  font-family: "xeicon";
+  content: "\e93f";
+}
+.main .container .more:hover::before, .main .container .more:focus::before {
+  width: calc(100% - 1.8rem);
+  transition: all 0.2s;
+}
+
+.slick-dots {
+  display: inline-block;
+  height: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  vertical-align: top;
+}
+.slick-dots li {
+  display: inline;
+}
+.slick-dots button {
+  overflow: hidden;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.5rem;
+  padding-top: 0.8rem;
+  border: 1px solid #252525;
+  transition: all 0.2s;
+}
+.slick-dots .slick-active button {
+  background-color: #252525;
+}
+.slick-dots + .control {
+  display: inline-block;
+  margin-top: 2.5rem;
+  vertical-align: top;
+}
+.slick-dots + .control button {
+  display: none;
+  overflow: hidden;
+  position: relative;
+  top: -0.5rem;
+  width: 2rem;
+  height: 2rem;
+  font-family: "xeicon";
+  color: #222;
+  text-align: center;
+  line-height: 2rem;
+}
+.slick-dots + .control button::before {
+  display: block;
+  content: "\ea3e";
+}
+.slick-dots + .control .stop::before {
+  content: "\ea3b";
+}
+.slick-dots + .control .active {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.slick-arrow {
+  overflow: hidden;
+  position: absolute;
+  right: 6rem;
+  top: 0;
+  z-index: 5;
+  width: 6rem;
+  height: 3.6rem;
+  font-family: "xeicon";
+  font-size: 3rem;
+  line-height: 3.6rem;
+  transition: all 0.2s;
+}
+.slick-arrow::before {
+  display: block;
+  content: "\e906";
+}
+.slick-arrow.slick-next {
+  right: 0;
+  border-left: 1px solid #ddd;
+}
+.slick-arrow.slick-next::before {
+  content: "\e907";
+}
+
+.visual {
+  float: left;
+  position: relative;
+  z-index: 0;
+  width: 68.75%;
+  text-align: center;
+}
+.visual .slick-list {
+  border-radius: 0 0 0 3rem;
+}
+.visual .slick-arrow {
+  right: 0;
+  height: 6rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  line-height: 6rem;
+}
+.visual .slick-arrow.slick-next {
+  top: 6rem;
+  border: 0 none;
+  background: rgba(0, 0, 0, 0.4);
+}
+.visual .slick-arrow:hover, .visual .slick-arrow:focus {
+  background-color: #000;
+}
+
+.cscenter {
+  float: right;
+  width: 31.25%;
+  height: 12rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.cscenter strong {
+  margin-right: 1rem;
+  color: var(--color1);
+}
+.cscenter strong::before {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  border-radius: 100%;
+  background-color: var(--color1);
+  font-family: "xeicon";
+  font-size: 1.2rem;
+  color: #fff;
+  content: "\ea64";
+  text-indent: -0.1rem;
+  text-align: center;
+  line-height: 2.1rem;
+  vertical-align: baseline;
+}
+.cscenter small {
+  font-size: 1.4rem;
+  color: #777;
+}
+.cscenter span {
+  display: block;
+  margin-top: 0;
+}
+.cscenter span.txt {
+  padding-bottom: 1rem;
+}
+
+/* 20230403 추가 */
+.cscenter .btn{
+  color: #333;
+  height: 5.3rem;
+  line-height: 5.1rem;
+  margin: 0;
+  border-radius: 1.2rem;
+  transition: all 0.3s;
+  display: inline-block;
+  min-width: 15rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.cscenter .btn.type{
+  border: 1px solid #2A54C3; background-color: #2A54C3;
+  border: 1px solid var(--sco1);
+  background-color: var(--sco1);
+  color: #fff;
+}
+.cscenter .btn.type:hover, .cscenter .btn.type:focus {
+  background-color: #fff;
+  color: var(--sco1);
+}
+.cscenter .btn a {
+  padding: 0 4.5rem;
+}
+.cscenter .btn.type img {
+  height: 80%;
+  margin-right: 1rem;
+}
+
+
+.main .container .guide {
+  float: right;
+  position: relative;
+  z-index: 1;
+  width: calc(31.25% + 6rem);
+  margin: 0 0 8rem -6rem;
+  padding: 4.1rem 4.3rem 12rem;
+  box-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.2);
+  border-radius: 0 4rem 0 4rem;
+  background-color: #222;
+  color: #fff;
+}
+.main .container .guide::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 4rem 0 4rem;
+  background-color: var(--color1);
+  content: "";
+  opacity: 0.08;
+}
+.main .container .guide .title {
+  font-size: 2.4rem;
+}
+.main .container .guide ul {
+  display: flex;
+  width: calc(100% + 1rem);
+  margin-top: 2.5rem;
+  text-align: center;
+}
+.main .container .guide ul li {
+  padding-right: 1rem;
+  flex-grow: 1;
+}
+.main .container .guide ul i {
+  display: block;
+  height: 5.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.main .container .guide ul a {
+  display: block;
+  padding: 3.5rem 1rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: all 0.2s;
+}
+.main .container .guide ul a:hover, .main .container .guide ul a:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.main .container .guide .btn {
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 7.5rem;
+  border-radius: 0 0 0 4rem;
+  background-color: var(--color1);
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 7.5rem;
+}
+.main .container .guide .btn::after {
+  position: absolute;
+  left: -20rem;
+  top: 50%;
+  width: 10rem;
+  height: 30rem;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+  content: "";
+  opacity: 0.2;
+  transform: translateY(-50%) rotate(65deg);
+}
+.main .container .guide .btn:hover::after, .main .container .guide .btn:focus::after {
+  left: calc(100% + 20rem);
+  transition: all 0.5s;
+}
+.main .container .guide .btn .daily_entry {
+  background: rgba(0, 0, 0, 0.15);
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+.main .container .guide .btn .online_class {
+  text-align: center;
+  flex: 1 1 auto;
+  justify-content: center;
+  font-size: 2rem;
+}
+.main .container .guide .btn .online_class::before {
+  display: inline-block;
+  position: relative;
+  margin-right: 0.75rem;
+  font-family: "xeicon";
+  font-size: 2.5rem;
+  font-weight: 400;
+  content: "\e9a5";
+  vertical-align: middle;
+}
+.main .container .guide .more {
+  top: calc(100% + 1rem);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color1);
+}
+.main .container .guide .more::before {
+  background-color: var(--color1);
+}
+
+.icon {
+  display: flex;
+  clear: both;
+  font-size: 1.8rem;
+  color: inherit;
+  text-align: center;
+}
+.icon li {
+  flex-grow: 1;
+}
+.icon em {
+  position: absolute;
+  left: 50%;
+  top: -1.5rem;
+  width: 4.5rem;
+  height: 2.2rem;
+  margin-left: -4.25rem;
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.8rem 0.8rem 0.8rem 0;
+  background-color: var(--color1);
+  font-size: 1.3rem;
+  color: #fff;
+  line-height: 2.2rem;
+  display: none;
+}
+.icon i {
+  display: block;
+  overflow: hidden;
+  width: 8.5rem;
+  height: 8.5rem;
+  margin: 0 auto 1.8rem;
+  border-radius: 0 2rem 2rem 2rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  line-height: 8.5rem;
+  position: relative;
+}
+.icon i::after {
+  content: "";
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  position: absolute;
+  right: 1.2rem;
+  top: 1.2rem;
+  background-color: var(--color1);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+}
+.icon img {
+  position: relative;
+  top: -0.25rem;
+  max-width: calc(100% - 2rem);
+  margin: 0 1rem;
+}
+.icon .type1 span {
+  font-weight: 600;
+}
+.icon .type1 em {
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.3);
+  background-color: #484848;
+}
+.icon .type1 i {
+  border-color: #bbb;
+  background-color: #F5F5F8;
+}
+.icon a {
+  display: block;
+  position: relative;
+  padding: 0 0.5rem;
+}
+.icon a:hover i, .icon a:focus i {
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.16);
+}
+.icon a:hover i::after, .icon a:focus i::after {
+  opacity: 1;
+  visibility: visible;
+}
+.icon a:hover img, .icon a:focus img {
+  transform: translateY(-8.5rem);
+  transition: all 0.2s;
+}
+
+.section02 {
+  margin-top: 6.5rem;
+  background-color: #F4F4F8;
+}
+.section02 .group {
+  float: right;
+  position: relative;
+  width: calc(50% - 2rem);
+}
+
+.main .container .notice {
+  float: left;
+  text-align: left;
+}
+.main .container .notice .list {
+  padding: 4.3rem 4rem 4.32rem;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+.main .container .notice .list li {
+  margin-top: 2.1rem;
+}
+.main .container .notice .list li:first-child {
+  margin-top: 0;
+}
+.main .container .notice .list li:first-child strong {
+  font-weight: 600;
+}
+.main .container .notice .list span {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #666;
+}
+.main .container .notice .list em {
+  display: inline-block;
+  position: relative;
+  top: -0.5rem;
+  width: 3.5rem;
+  height: 2.2rem;
+  margin-right: 0.5rem;
+  border: 1px solid #222;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 2rem;
+  vertical-align: middle;
+}
+.main .container .notice .list strong {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  max-width: calc(100% - 6rem);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.main .container .notice .list strong::before {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: #222;
+  content: "";
+}
+.main .container .notice .list a {
+  display: block;
+  position: relative;
+  padding-right: 9rem;
+  font-size: 1.8rem;
+  color: #222;
+}
+.main .container .notice .list a:hover strong::before, .main .container .notice .list a:focus strong::before {
+  width: 100%;
+  transition: all 0.2s;
+}
+.main .container .notice .list .new {
+  display: inline-block;
+  position: absolute;
+  left: auto;
+  top: 0;
+  overflow: hidden;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0.3rem 0 0 1rem;
+  background-color: var(--color1);
+  font-size: 1rem;
+  color: #fff;
+  text-indent: -0.25rem;
+  text-align: center;
+  line-height: 1.4rem;
+  vertical-align: middle;
+}
+.main .container .notice .list .new:before {
+  display: block;
+  content: "N";
+}
+
+.main .container .class .item i {
+  display: block;
+  overflow: hidden;
+  border-radius: 0 0 4rem 0;
+  background-color: #000;
+}
+.main .container .class .item img {
+  width: 100%;
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.2s;
+}
+.main .container .class .item strong {
+  display: block;
+  margin: 2rem 0 0.5rem;
+  font-size: 2rem;
+  color: #222;
+}
+.main .container .class .item span {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  height: 4rem;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: keep-all;
+}
+.main .container .class .item a {
+  display: block;
+  width: 29.5rem;
+  margin: 0 1.5rem;
+  text-align: left;
+}
+.main .container .class .item a:hover img, .main .container .class .item a:focus img {
+  opacity: 0.75;
+  transform: scale(1.2);
+}
+.main .container .class .list {
+  margin: 0 -1.5rem;
+}
+.main .container .class .slick-list {
+  margin-bottom: 3.5rem;
+}
+.main .container .class .more {
+  top: auto;
+  bottom: 0;
+}
+
+.sns .item {
+  display: inline-block;
+  width: 29.5rem;
+  margin-right: 3rem;
+  text-align: left;
+  white-space: normal;
+  vertical-align: top;
+}
+.sns .item span {
+  font-size: 1.4rem;
+  color: #777;
+}
+.sns .item strong {
+  display: block;
+  overflow: hidden;
+  max-height: 5.6rem;
+  margin-top: 1.5rem;
+  font-weight: 400;
+  color: #444;
+  line-height: 2.8rem;
+}
+.sns .item i {
+  display: inline-block;
+  overflow: hidden;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 0.5rem;
+  border-radius: 100%;
+  font-family: "xeicon";
+  color: #fff;
+  text-align: center;
+  line-height: 2.4rem;
+  vertical-align: middle;
+}
+.sns .item i::before {
+  display: block;
+}
+.sns .item i.facebook {
+  background-color: #1877F2;
+}
+.sns .item i.facebook::before {
+  content: "\ebd3";
+}
+.sns .item i.youtube {
+  background-color: #FF0000;
+}
+.sns .item i.youtube::before {
+  content: "\ec32";
+}
+.sns .item a {
+  display: block;
+}
+.sns .item a:hover strong, .sns .item a:focus strong {
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.sns #mCSB_1_container {
+  white-space: nowrap;
+}
+.sns .mCSB_horizontal.mCSB_inside > .mCSB_container {
+  margin-bottom: 0;
+}
+.sns .mCustomScrollBox {
+  margin-top: -3.75rem;
+  padding-top: 4.5rem;
+}
+.sns .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  position: absolute;
+  left: 7.5rem;
+  top: 0;
+  width: calc(100% - 7.5rem);
+}
+.sns .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+  height: 1px;
+  margin: 0;
+  background-color: #E2E2E2;
+}
+.sns .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
+  height: 1px;
+  margin: 0;
+  background-color: #333;
+}
+
+/* =======================================================================================
+블랙모드
+======================================================================================= */
+.contrast {
+  background: #2D2D2D;
+}
+.contrast .header {
+  background: #1E1E1E;
+}
+.contrast .header .gnb_area .logo .link {
+  background-position: 0 -3.4rem;
+}
+.contrast .header.active .gnb_area .logo .link {
+  background-position: 0 0;
+}
+.contrast .header .topmenu .depth1 > a {
+  color: #fff;
+}
+.contrast .header .topmenu .depth1.active > a {
+  color: #222;
+}
+.contrast .icon i {
+  background: #F5F5F8;
+}
+.contrast .icon span {
+  color: #fff;
+}
+.contrast .slick-dots button {
+  border-color: #fff;
+}
+.contrast .slick-dots .slick-active button {
+  background-color: #fff;
+}
+.contrast .slick-dots + .control button,
+.contrast .slick-arrow {
+  color: #fff;
+}
+.contrast .section02 {
+  background: #1E1E1E;
+}
+.contrast .main .container .group .title {
+  color: #fff;
+}
+.contrast .main .container .class .item a {
+  color: #fff;
+}
+.contrast .main .container .class .item a strong,
+.contrast .main .container .class .item a span {
+  color: inherit;
+}
+.contrast .main .container .cscenter span {
+  color: #fff;
+}
+.contrast .footer {
+  background: #1E1E1E;
+  color: #fff;
+  border-top-color: #666;
+}
+.contrast .footer .address_group {
+  color: inherit;
+}
+.contrast .footer .address_group strong {
+  color: inherit;
+}
+
+  .cscenter {
+    padding: 2.5rem 4rem;
+  }
+  .cscenter small {
+    display: none;
+  }
+  .main .container .guide {
+    padding: 2rem 3rem 8.5rem;
+  }
+  .main .container .guide ul {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+  .main .container .guide ul li {
+    padding: 0;
+  }
+  .main .container .guide ul li + li {
+    margin-top: 1rem;
+  }
+  .main .container .guide ul a {
+    display: table;
+    width: 100%;
+    padding: 1.5rem 0;
+    text-align: left;
+    table-layout: fixed;
+  }
+  .main .container .guide ul a > * {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .main .container .guide ul i {
+    width: 8rem;
+    height: auto;
+  }
+  .main .container .guide ul img {
+    position: relative;
+    top: 0.2rem;
+    width: 3rem;
+  }
+  .main .container .guide .btn {
+    height: 6rem;
+    line-height: 6rem;
+  }
+  .icon {
+    font-size: 1.6rem;
+  }
+  .main .container .notice .list {
+    padding: 4rem;
+  }
+  .main .container .notice .list li {
+    margin-top: 1.1rem;
+  }
+}
+@media (max-width: 640px) {
+  .main .container .group {
+    margin: 3rem 0;
+  }
+  .visual {
+    float: none;
+    width: 100%;
+  }
+  .cscenter {
+    float: none;
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+    padding: 3rem 0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+  }
+  .cscenter small {
+    display: inline;
+  }
+  .main .container .guide {
+    float: left;
+    width: 100%;
+    margin: 0 0 4rem;
+  }
+  .main .container .guide ul {
+    display: flex;
+    width: calc(100% + 1rem);
+  }
+  .main .container .guide ul li {
+    margin-right: 1rem;
+    flex-grow: 1;
+  }
+  .main .container .guide ul li + li {
+    margin-top: 0;
+  }
+  .main .container .guide ul a {
+    padding: 2rem 0 1.75rem;
+  }
+  .main .container .guide ul a > * {
+    display: block;
+    text-align: center;
+  }
+  .main .container .guide ul i {
+    height: 4rem;
+    margin: 0 auto 1rem;
+  }
+  .icon {
+    flex-wrap: wrap;
+  }
+  .icon li {
+    width: 25%;
+    margin-top: 3rem;
+    flex-grow: 0;
+  }
+  .section02 {
+    padding: 1px 0;
+  }
+  .section02 .group {
+    float: none;
+    width: 100%;
+  }
+  .main .container .notice {
+    float: none;
+  }
+  .main .container .class {
+    padding-bottom: 3rem;
+  }
+  .event_foot_pop {
+    width: auto;
+    max-width: 100%;
+  }
+}/*# sourceMappingURL=main.css.map */
+:root { --color1: #2A54C3; --sco1: #2A54C3; --sco2: #0D3190; --sco3: rgba(13,49,144,.4); }
+
+::-moz-selection { background: #2A54C3; color: #fff; }
+
+::selection { background: #2A54C3; color: #fff; }
+
+.gnb_area .logo .link { background-image: url("../img/olparksports/logo.svg"); width: 33.6rem; }
+
+.enter_info { margin-bottom: 6rem; }
+
+.enter_info .group { background-color: #F2F3F8; border-radius: 2rem; margin-bottom: 4rem; padding: 5rem; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; }
+
+.enter_info .group::before { content: ''; width: 4rem; height: 4rem; border-radius: 50%; background-color: #666; position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); bottom: -2rem; }
+
+.enter_info .group::after { content: ''; font-family: 'xeicon'; width: 4rem; height: 4rem; line-height: 4rem; font-size: 2rem; font-weight: 700; text-align: center; color: #fff; position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); bottom: -2.2rem; }
+
+.enter_info .group .img_box { width: 24rem; border-radius: 1rem; overflow: hidden; }
+
+.enter_info .group .txt_box { padding-left: 5rem; width: 100%; }
+
+.enter_info .group .txt_box .ti { font-size: 2.2rem; font-weight: 700; color: #151515; margin-bottom: 1rem; }
+
+.enter_info .group .txt_box .ti .num { color: #3169C4; margin-right: 1.2rem; }
+
+.enter_info .group:last-child::before, .enter_info .group:last-child::after { display: none; }
+@charset "utf-8";
+/* Play */                  @import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+/* SpoqaHanSansNeo */       @import url('../font/SpoqaHanSansNeo.css');
+/* XEIcon */                @import url('../font/xeicon.min.css');
+/* remixicon */                @import url('../font/remixicon.css');
+/* GmarketSans */                @import url('../font/webfonts_GmarketSans.css');
+
+/* 챗봇상담 플로팅메뉴 */
+  #chatbot-consult-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    padding: 6px 16px;
+    background-color: #2A54C3;  /* 센터별 변경 - 색상 */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 1;
+    z-index: 9999;
+  }
+
+  #chatbot-consult-btn img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    padding: 2px;
+  }
+
+  #chatbot-consult-btn:hover {
+    transform: scale(1.05);
+  }
+
+@media (max-width: 767.98px) { .gnb_area .logo .link { width: 29rem; }
+  .enter_info .group { padding: 4rem 3rem; display: block; }
+  .enter_info .group .txt_box { padding-left: 0; margin-top: 2rem; } }
+/*# sourceMappingURL=olparksports.css.map */
+
+@import "mixin";
+
+/* =======================================================================================
+common
+======================================================================================= */
+
+:lang(en){font-family:'Play', sans-serif;}
+.container{max-width:$container;margin:0 auto;position: relative;}
+#wrap{position: relative;
+	&::before{content:'';display: flex;}
+}
+
+/* =======================================================================================
+header
+======================================================================================= */
+
+@keyframes dropUp{
+    0%{transform:translateY(-100%)}
+    100%{transform:translateY(0)}
+}
+@keyframes dropDown{
+    0%{transform:translateY(-100%)}
+    100%{transform:translateY(0)}
+}
+
+.header{position:absolute; left:0; top:0; z-index:7; width:100%; background: #fff;
+    .container{position:static;display: flex;justify-content: space-between;/*max-width:$wideCont;*/}
+    &.active{box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.06);
+        .gnb_area{background: #fff;border-bottom: 1px solid #DDD; }
+		.topmenu::after{opacity:1;}
+    }  
+    &.fixed{position:fixed; animation:dropDown .3s cubic-bezier(.215,.61,.355,1);  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.06);
+        .gnb_site{display: none;}
+    }  
+}
+
+.gnb_site{background-color: #2D2D2D;color:#ccc;font-size: 1.5rem;
+    .container{height: $gnbSiteH;}
+    .xi-angle-down-min{width: 2.2rem;height: 2.2rem; font-size: 1.4rem; @include flex; border-radius: 50%;border: 1px solid rgba(255,255,255,.5); margin-left: 1rem;transition:.2s;}
+    .site_area{display: flex;
+        .list{display: flex;
+            a{display: flex;align-items:center;font-size: inherit;position: relative;transition:.2s;                
+                &:hover{color:#fff;}
+                ~ a{@include vbar(1px, 1rem, rgba(255,255,255,.27), 1rem);}
+                &:first-child{color:#fff;}
+            }
+        }        
+    }
+	.site_area_mobile{position: relative;display: none;
+		.title{display: flex; align-items: center; padding:1rem;color:#fff;font-size: 1.5rem; }
+        .list_wrap{width: 37rem; background: #fff;border-radius: 1rem; padding:2rem; box-shadow:0 1rem 1.5rem rgba(0,0,0,.24); @include inactive(.2s); color: #000; position: absolute; left: .8rem;top: .8rem;
+			.represent{border-bottom: 1px solid #E8E8E8;padding-bottom: 2rem;font-size: 1.6rem;font-weight: 700;margin-bottom: 1.5rem;display: flex;align-items:center;
+				a{display: inline-flex;align-items:center;
+					span{margin-top: 0.5rem;}
+				}
+				i{border-color: #DFDFDF;color: #000;}
+			}  
+			.list{display: flex;}			
+			ul{flex:0 0 50%;max-width:50%;
+				li~li{margin-top: 1.8rem;}
+				a{display: flex;align-items:center;font-size: 1.5rem;font-weight: 500; position: relative;        
+					&::before{content: '';display: block;width: 2.5rem;flex:0 0 2.5rem; max-width:2.5rem; height: 2.5rem;background: url("/img/common/gnb_site_logos.svg") 0 0/2.5rem auto no-repeat;margin-right: 0.5rem; color: inherit;}
+					span{ display: inline-block;position: relative;white-space:nowrap;
+						&::after{content:""; display: block; width:.5rem;height:.5rem;border-radius: 50%;background: $color2; transform:scale(0);transition:.2s;position: absolute;right: -.8rem;top: -.3rem; }
+					}					
+					&:hover span::after{transform:scale(1);transition-delay:.2s;}
+				}
+			} 
+			.group1{
+				@for $i from 0 through 7 {
+					li:nth-child(#{$i+1}) a::before{background-position:0 (-$i*3.5rem);}
+				}
+			}
+			.group2{
+				@for $i from 0 through 7 {
+					li:nth-child(#{$i+1}) a::before{background-position:0 (-28rem-$i*3.5rem);}
+				}
+			}
+        }
+		&.active {
+			i{transform:rotate(180deg);}
+			.list_wrap{@include active();z-index: 12;}
+		}
+    }  
+    .gnb_util{display: flex;align-items:center;
+        .welcome{display: block;margin-right: 1rem; }
+        a{font-size: 1.5rem;padding:.8rem .4rem; display: flex;
+            i{margin-right: 0.5rem;}
+        }
+        .nav{display: flex;
+             li ~ li{@include vbar(1px, .8rem, rgba(255,255,255,.27), 1rem);}
+        }
+        .icon_join,
+		.icon_mypage{width:1.8rem;height:2rem;background:url("../img/common/icon_user.svg") 0 0/1.8rem 4rem no-repeat;}
+        .icon_login{width:1.7rem;height:2rem;background:url("../img/common/icon_lock.svg") 0 0/1.7rem 4rem  no-repeat;}
+		.icon_logout{width:1.7rem;height:2rem;background:url("../img/common/icon_unlock.svg") 0 0/1.7rem 4rem  no-repeat;}
+    }    
+}
+
+.gnb_area{position: relative;transition:.2s;   
+    .nav{display: flex;}  
+    .logo{padding: 2.6rem 0;height:$gnbAreaH;
+        .link{background: url("../img/common/logo.svg") 0 0/100% 6.8rem no-repeat;display: block;height: 3.4rem;}
+    } 
+    .gnb_wrap{display: flex;}   
     
-    .popup_close_wrap {display: flex; align-items: center; gap: 15px;/* 체크박스와 닫기 버튼 사이 간격 */
-    justify-content: flex-end; margin: 0px 15px;} /* 오른쪽 정렬, 필요시 flex-start나 center로 바꿀 수 있음 */
+    .btn_allmenu{margin-left:1.2rem;background: var(--color1);
+        .icon{display: block;width: 1.8rem;height: .2rem;background: #fff;position: relative;margin:0 auto;
+            &::before,
+            &::after{content:"";display: block;width: 1.8rem;height: 0.2rem;background: #fff; border-radius: 0.2rem;top:-.7rem;position: absolute;right: 0;}            
+            &::after{width: 1.8rem;top:.7rem;}
+        }
+    }
+    .btn_sch_open{color:$text; background-color: #F2F3F8;
+        .xi-search{font-size: 2.4rem;}
+    }    
+    .sch_layer{@include inactive(.3s); position: absolute;left: 0;top:$gnbAreaH; z-index:9;background:#fff;width:100%; text-align:center;padding:0;box-shadow:0 2rem 2rem rgba(0,0,0,.12); overflow:hidden;       
+        input[type=text]{border:0;border-bottom:3px solid #F2F2F2;color:#727272;font-size:2.8rem;width:60rem;padding:1.5rem 4rem 1.5rem 1.5rem; margin-left: 2rem;}
+        .btn_sch{font-size:2.5rem;color:#5D5D5D; transform:translateX(-3rem); vertical-align:middle}
+        .btn_sch_close{ @include pos(lt, 50%, 3rem, -50%); 
+            i{color:#373737;font-size: 3rem;font-weight:700}
+        }  
+        &.active{opacity: 1;visibility: visible;border-top:1px solid #E9E9E9;padding:12rem 0 7rem;}  
+    }  
+}    
+
+// topmenu
+.topmenu{ display:flex;
+	&::after{content:'';display: block;width: 100%;height:1px;position: absolute;left: 0;top:$gnbAreaH;z-index: 5;background: #E9E9E9;opacity:0;transition:.2s;}
+    a[target="_blank"]::after{ 
+        display:inline-block; font-family: 'xeicon'; content:'\e980'; margin-left:.3rem; font-weight:300;
+    }
+    .depth1{
+        >a{@include flex; padding:3.75rem 4rem; color:#151515;
+            span{display:block;white-space:nowrap;font-size:2rem;font-weight:700;position:relative;letter-spacing:-.025em;
+                &::after{content:""; display: block; width:.7rem;height:.7rem;border-radius: 50%;background: var(--color1); transform:scale(0);transition:.2s;position: absolute;right: -1rem;top: -1rem; }
+            }
+        }
+        &.active{
+            >a{
+                span::after{transform:scale(1.2);transition-delay:.2s;}
+            }
+            .submenu{@include active(100rem); transition-delay:.2s;}
+        }
+    }    
+    .submenu{transition:.35s, max-height 1.35s cubic-bezier(.13,.67,.59,.98); opacity:0;visibility: hidden; overflow:hidden;max-height:0; @include pos(lt,0,$gnbAreaH);z-index:20; width:calc(100% - #{$quickW}); background-color:#fff; text-align:left; box-shadow:0 2rem 2rem rgba(0,0,0,.12); border-radius: 0 0 4rem 4rem;}      
+    .title_area{width:$container;@include pos(lt,50%,auto,-50%);margin-top:4rem;
+        .title{font-size:4.2rem;color:#000;margin-bottom:.5rem;}
+        em{color:var(--color1);position:relative;font-size: 1.8rem;font-weight: bold;} 
+    }
+    .depth2{max-width:$container;margin:4rem auto;position:relative;overflow-y:auto;padding-left:36rem;display:flex;flex-wrap:wrap;        
+        >li{flex:0 0 23.2%;margin-left:1.8%;position:relative;margin-bottom:2rem;            
+            >a{display:block;border:3px solid #F7F8FA;border-radius: 0.8rem;padding:1.5rem;font-size:1.7rem;color:#3b3b3e;font-weight: 500;
+                &:hover{color:var(--color1); border-color:var(--color1); transition:.25s}
+            }
+            &.is-depth3{
+                >a{position: relative;
+                    &::after{display:inline-block; font-family: 'xeicon'; content:'\e942'; font-size: 1.8rem;color: #333;@include pos(rt, 2rem, 50%, 0, -50%)}
+                }
+            }
+        }
+    }
+    .depth3{margin:1.5rem 0 2.5rem 1rem;
+        >li>a{color:#727272;display:block;padding:.7rem 0 .7rem 1rem;position:relative;
+            &::before{content:'';display:block;width:.3rem;height:.3rem;@include pos(lt, 0, 1.5rem);border-radius:50%;background-color:#b3bec1}
+            &:hover{color:var(--color1);font-weight:700;text-decoration: underline;}
+        }
+    }
+    .depth4{display:none} 
+
+    //gnb 메뉴가 다 펼쳐지는 경우
+    &.fullmenu{
+        .depth1.on > a{color: var(--color1);}  
+        .depth1 > a span::after{transform:scale(0);}
+        .depth1:hover > a span::after,
+        .depth1.on > a span::after{transform:scale(1.2);}
+        .depth1.active .submenu{margin: 3rem 0;transition:margin .3s, opacity .5s,max-height 1.35s cubic-bezier(.13,.67,.59,.98);transition-delay: .2s;}
+        .submenu{transition:.35s; width: auto; position:static; left: auto; background-color: transparent; border-top:0;box-shadow:none;      
+            .title_area{display: none;padding: 0;}
+            .depth2{padding-left: 2rem;max-width: inherit;display:block;margin-top:0;margin-bottom:0;
+                >li{margin-bottom: 0;flex:auto;margin-left:auto;
+                    >a{border: 0;}
+                    &.is-depth3 > a:after{display: none;}
+                }
+            }
+            .depth3{display: none;}            
+        }        
+    }
+}
+
+//allmenu
+.allmenu {display:block;position:fixed;left:0;top:0;width:100%;height:100%;z-index:8;padding-left: 
     
-    .popup_close_btn {display: inline-flex; align-items: center; cursor: pointer; margin: 10px 0px; font-size: 25px;}
+    .topmenu{display:flex;justify-content:space-between; height:calc(100% - 10rem);overflow:auto;margin:0 auto;
+		&::after{display: none;}
+        @include scrollbar();
+        .submenu{@include active(inherit);width:100%; position:static;box-shadow:none;background:none;
+            &::before{display: none;}            
+        }
+        .depth1{display: block;position:relative; flex:1 1 16.66%;max-width:16.66%;height:60vmax;
+            &:hover{background: #F7FAF9;}          
+            >a{ display:block; font-size:2.8rem;padding:1.7rem 1.5rem;margin-left: 0;transition:.2s;
+                span{font-weight: 700;text-align: left;}
+            }
+            &:last-child{display: block;}
+        }  
+        .depth2{display: block;padding-left: 0;margin:0;}      
+        .title_area,
+        .depth1>a::before{display:none}
+        //.depth2>li>a::after{display:none}
+        .depth2>li{margin-bottom: 0;margin-left: 0;
+            >a{border:0;font-size: 1.8rem;}
+        }
+        .depth3{margin:0 0 0 1.5rem;}       
+    }
+    .sitemap_footer{margin-top: 5rem;
+        .sns_list {margin-bottom: 1rem;
+            a{margin-right: 1rem;}
+            i{font-size: 1.8rem;color: #222;}
+        }
+        .copyright{color: #757575;}
+    } 
+} 
 
-    .header { position: absolute; left: 0; top: 0; z-index: 7; width: 100%; background: #fff; }
+.main{position:relative;width: 100%;margin-top: $headH;}
+//.fixed + .main{margin-top: $gnbAreaH;}
 
-    .header .container { position: static; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between;}
+.quick{position: fixed;right: 0;top: 50%; transform:translateY(-50%); z-index:9; width: 9.8rem; border-radius: 1.2rem 0 0 1.2rem;background: #fff; text-align: center; box-shadow:-.3rem .3rem 1rem rgba(0,0,0,0.07);  border-radius: 1rem 0 0 1rem;overflow:hidden;
+    i{display: block;width: 4rem;height: 4rem;margin:0 auto; background:0 0 /100% 8rem no-repeat}
+    // @for $i from 1 through 7 {
+	// 	.item_#{$i} i{ background:url("../img/common/quick_icon"+ $i +".svg") 0 0 /100% 8rem no-repeat }
+    // }     
+    a{display: block;padding:1.8rem 1rem;transition:.2s;}
+    span{font-size: 1.6rem;}
+    .active a,
+    a:hover{background: #333;color: #fff;
+		i{background-position:0 -4rem;}
+	}
+}
+//contrast & fontsize
+.acctoggle{position: fixed;left: 0;top: 50%;z-index: 6; transform:translateY(-50%);border-radius: 0 1.2rem 1.2rem 0;background: #fff;color:#151515; text-align: center; border: 1px solid #EBEBEB; box-shadow:.3rem .3rem 1rem rgba(0,0,0,0.07);
+	button{display: block;padding:1rem .5rem;min-width:5rem;min-height:5rem;position: relative;transition:.2s;
+		i{font-size: 2.4rem;transition:.2s;}
+		span{font-size: 1.4rem;color:#fff;}
+		&::before{content: '';display: block;width: 0;height:100%;transition: .2s ease;background-color:#666;position: absolute;left: 0;top: 0;}
+		~button{border-top: 1px solid #e5e5e5;}		
+		&:hover{background: #e5e5e5;
+			/* i{opacity:0;}
+			span{opacity:1;visibility:visible;transition-delay:.1s;}
+			&::before{width:100%;} */
+		}   
+		span{opacity:0;visibility:hidden;transition:.2s;position: absolute;left: 0;top: 0;width: 100%;height: 100%; @include flex;}
+	}	 
+	.acctoggle_contrast,
+	.acctoggle_sns{border-radius:0 1.2rem 0 0;}
+	.acctoggle_fontsize{border-radius:0 0 1.2rem 0;}
+}
+
+/* =======================================================================================
+go_top
+======================================================================================= */
+.go_top{display:none;width:5rem;height:6rem;color:#151515; position:fixed;text-align:center;left: 0;top:50%; transform:translateY(9rem); z-index:8;background:#333;color:#fff;border-radius: 0 1rem 1rem 0;
+    i{font-size:2.2rem; transition:.2s;}
+    span{display:block;font-size:1.3rem;line-height:1}   
+	&:hover{
+		i{transform:translateY(-.5rem);}
+	}
+}
+
+/* =======================================================================================
+footer
+======================================================================================= */
+.footer{ position:relative;border-top:1px solid #ddd;padding: 3rem 0; color:$text; 
+    .container{max-width: $container;}
+    .footer_nav_bar{display: flex;flex-wrap:wrap;justify-content: space-between;align-items:center;margin-bottom: 2rem;}
+    .footer_nav{       
+        a{display: inline-block;padding: 3rem 0;font-size:1.7rem;
+            ~ a{@include vbar(1px, .8rem, #c6c6c6, 1rem);}
+        }
+        strong{color:var(--color1);}
+    }  
+    
+    .footer_cont{@include flex(space-between, flex-start);}
+    .cont_left{@include flex(flex-start, flex-start);}     
+    .footer_logo{margin:-2rem 9rem 0 0;
+        .link{background: url("../img/common/footer_logo.svg") 0 0/contain no-repeat;display: block;width: 19.6rem;height: 8.3rem;}
+    } 
+    .address_group{line-height:1.8;color:#555;display:block;
+        address {
+            strong{color:$text;}
+            span{display: block;}
+        }
+    }
+    .sns_list{
+        a~a{margin-left: 1.5rem;}
+        i{font-size: 2.8rem;}
+    }
+    .copyright{display:block;}
+    .relate_site{ width:20.7rem;position: relative;
+        .title{display:block;padding:1.4rem 0;border-bottom:1px solid #707070;}
+        i{font-size: 2rem; @include pos(rt, 1rem, 50%, 0, -50%);transition:.3s;}
+        .list{opacity:0;visibility:hidden;overflow:hidden; @include pos(lb, auto, 4.9rem); max-height:0;background-color:#fff;transition:.3s; width:100%; z-index: 2;
+            >li{padding:0;border:0;text-align:left;
+                a{display:block;padding:.3rem 1rem;font-size:1.4rem;color: #757575;}
+                a:hover{background-color:#e5e5e5;}
+            }
+        }
+
+    }
+}
+
+/* =======================================================================================
+폰트사이즈
+======================================================================================= */
+@mixin site_area{
+    .gnb_site .site_area{display: none;}
+    .gnb_site .site_area_mobile{display: block;}
+}
+.acc_fontsize{font-size: 13px;
+    @include site_area;
+    .quick {
+        a{padding: 1rem 0;}
+        i{display: none;}
+    }
+}
+
+/* =======================================================================================
+블랙모드
+======================================================================================= */
 
 
 
+
+
+
+@media (max-width:($wideCont + 139px)){
+    .topmenu .submenu{width:100%;}
+
+}
+@media (max-width:1800px){
+  .quick{display: none;}
+}
+@media (max-width:$web){
+    html{font-size:9px}
+    .container{padding:0 1.5rem}
+	.gnb_site .site_area .list a{letter-spacing:-1px;}
+	.gnb_site .site_area .list a~a{padding-left: 0.45rem;margin-left: 0.45rem;}
+	.gnb_site .gnb_util {
+        .text{display: none;}
+        a{padding-left: 0;padding-right: 0;}
+    }
+    .allmenu{padding-left: 0;}
+    .allmenu .header .gnb_area .gnb_wrap{left:0;padding:0;}
+    .allmenu .pop_eng_title{display: none;} 
+    .submenu .title_area{width:20%;left:2rem;transform:none;
+        .title{font-size:3rem;}
+        p{width:100%;}
+    }   
+    //.acctoggle{display: none;}
+    .topmenu .depth1 > a {
+        padding: 3.75rem 3rem 3.75rem 1.5rem;
+        span{font-size: 1.8rem;}
+    }
+}
+
+@media (max-width:$pad){   
+    html.acc_fontsize{font-size: 10px; }        
+    .header{ 
+        .topmenu{display:none;} 
+		&.active {			
+			.topmenu{
+				&::after{top:0;}
+			}
+		}
+    }    
+	
+    .allmenu {
+        .header{
+			.gnb_area .gnb_wrap{top:$headH;overflow:visible;
+                .nav{height:100%;}				
+            }           
+        }
+        .pop_title{display:none}
+        .topmenu{position:relative;display: block; padding:3rem 0; border-top: 1px solid #e8e8e8;
+            .depth1{position: static;flex: 1 1 100%;max-width:100%;margin-left: 0;margin-bottom: 0; height:auto;                
+                >a{border:0;border-bottom:1px solid rgba(255,255,255,.2);padding:2.5rem 4.5rem;
+                    span{font-weight:700;font-size: 3.7rem;
+                        &::before,
+                        &::after{display: none;}
+                    }
+                }
+                &.active {
+                    >a{ position: relative;
+                        &::after{content:""; display: block; width: 1.3rem;height: 0.8rem;background:url('../img/common/select_arrow.png') 0 0/contain no-repeat;@include pos(rt, 4rem,50%, 0 ,-50%);border:0;}
+                    }
+                    span{color:#111;font-weight:700;background-color:#fff;}                    
+                    .submenu{display:block;padding:0 3rem;max-height:inherit;}
+                }
+				&:hover{background:none;}
+            }
+            &.active{
+                .depth1 {
+                    >a{color: #757575;}
+                }
+            }
+            .submenu{display:none; background-color:#fff; overflow-y:auto;}
+            .depth2>li{flex-basis:100%;
+                &.active{
+                    >a{background-color:var(--color1); color:#fff;}
+                    >.depth3{display:block; margin:1rem;}
+                }
+                &.is-depth3{
+					>a::after{display: none;}
+                    >a::before{ display:inline-block; font-family: 'xeicon'; content:'\e942'; font-size: 1.8rem;@include pos(rt, 1rem, 1.7rem); z-index:2;color:#aaa;transition:.2s;}
+                    &.active>a::before{transform:rotate(180deg);color:#fff;}
+                }
+                >a{color:#333; font-size: 2.4rem;}
+            }
+            .depth3{display:none;
+				font-size: 2rem;
+                //>li~li{border-top:1px solid #e6eaef;}
+            }
+        }        
+        .sitemap_footer{display: block;position: fixed; left: 0; right:0; bottom: 0; background: #fff;text-align: center;padding: 2rem 0;
+			.sns_list i{font-size: 2.8rem;}
+		}   
+    }  
+    .go_top{right:0rem;}
+    .sns_list{text-align: center;} 
+    .footer .footer_nav{text-align: center;
+        a{padding-top: 1rem;padding-bottom: 1rem;}
+    } 
+     
+}
+@media (max-width:$mobile){
+    html{font-size:8px;
+        &.acc_fontsize{font-size: 9px; }
+    }
+	.gnb_area {
+        .logo{padding: 3.4rem 0;}
+        .sch_layer input[type=text] {
+            width: 85%;
+        }
+	}
+    .footer{
+        .footer_nav{
+            >li{padding-left:1rem;margin-left:1rem;}
+            &::after{left:0;width:100%;}
+        }
+        .footer_cont{display: block;width: 100%;}
+        .cont_left{display: block;}
+        .address_group{text-align:center;}
+        .relate_site{width:100%;margin-bottom:3rem;}
+    }   
+}
+@media (max-width:$smobile){
+    html{font-size:7px;
+        &.acc_fontsize{font-size: 8px; }
+    }
+}
 
 </style>
 </head>
+
 <body>
     <input type="checkbox" id="popupToggle">
     <div class="modal_popup_wrap popup1" id="modalLayer">
         <div class="modal_popup">
             <div class="item_list">
-            <a href="https://www.instagram.com/olpark_sc/" target="_blank" title="새창" class="item">
-            <img src="https://www.ksponco.or.kr/sports/upload/popup/a6/202505151502017231.png" alt="">
-            </a></div>
+                <a href="https://www.instagram.com/olpark_sc/" target="_blank" title="새창" class="item">
+                    <img src="https://www.ksponco.or.kr/sports/upload/popup/a6/202505151502017231.png" alt="">
+                </a>
+            </div>
             <div class="popup_close_wrap">
-            <!-- 7일간 보지 않기 체크박스 -->
-            <label for="dontShow7Days" class="custom-checkbox-label">
-            <input type="checkbox" id="dontShow7Days"><span>7일간 보지 않기</span></label>
-            <!-- 닫기 버튼 -->
-            <label for="popupToggle" class="popup_close_btn" role="button" tabindex="0"><i class="xi-close-thin"></i><span class="sr-only">×</span></label>
+                <!-- 7일간 보지 않기 체크박스 -->
+                <label for="dontShow7Days" class="custom-checkbox-label">
+                    <input type="checkbox" id="dontShow7Days"><span>7일간 보지 않기</span></label>
+                <!-- 닫기 버튼 -->
+                <label for="popupToggle" class="popup_close_btn" role="button" tabindex="0"><i
+                        class="xi-close-thin"></i><span class="sr-only">×</span></label>
             </div>
         </div>
     </div>
     <header class="header">
         <div class="gnb_site">
             <div class="container">
-                
-<nav class="site_area">
-    <div class="list">
-        <a href="https://www.ksponco.or.kr/"><span>한국체육산업개발(주)</span></a>
-        <a href="https://www.ksponco.or.kr/olympicpark/"><span>올림픽공원</span></a>
-        <a href="https://www.ksponco.or.kr/sports"><span>스포츠센터</span></a>
-        <a href="https://www.ksponco.or.kr/boatracepark"><span>미사경정공원</span></a>
-        <a href="https://www.ksponco.or.kr/lib"><span>지샘터도서관</span></a>
-        <a href="https://www.ksponco.or.kr/recruit"><span>KSPO&amp;CO채용</span></a>
-        <a href="https://www.ksponco.or.kr/onlinesports"><span>온라인스포츠센터</span></a>
-        <a href="https://www.ksponco.or.kr/online" target="_blank"><span>온라인예약</span></a>
-        <a href="https://www.ksponco.or.kr/culture/" target="_blank"><span>대관예약</span></a>
-        <a href="https://www.ksponco.or.kr/spm" target="_blank"><span>수강신청</span></a>
-        <a href="https://www.ksponco.or.kr/programProposal?mid=a10201060000"><span>프로그램제안</span></a>
-    </div>
-</nav>
-<nav class="site_area_mobile">
-    <a href="#siteAreaMobile" class="title" title="패밀리사이트열기">한국체육산업개발<i class="xi-angle-down-min"></i></a>
-    <div class="list_wrap" id="siteAreaMobile">
-        <div class="represent">
-            <a href="https://www.ksponco.or.kr/"><img src="https://www.ksponco.or.kr/sports/img/common/gnb_site_represent.svg" alt=""><span>한국체육산업개발(주)</span></a>
-            <button type="button"><i class="xi-angle-down-min"></i></button>
-        </div>
-        <div class="list">
-            <ul class="group1">
-                <li><a href="https://www.ksponco.or.kr/olympicpark"><span>올림픽공원</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/boatracepark"><span>미사경정공원</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/lib"><span>지샘터도서관</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/recruit"><span>KSPO&CO채용</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/onlinesports"><span>온라인스포츠센터</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/online" target="_blank"><span>온라인예약</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/culture/" target="_blank"><span>대관예약</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/programProposal?mid=a10201060000"><span>프로그램제안</span></a></li>
-            </ul>
-            <ul class="group2">
-                <li><a href="https://www.ksponco.or.kr/sports"><span>스포츠센터</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/sports/olparkswim"><span>올림픽수영장</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/sports/olparksports"><span>올림픽공원스포츠센터</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/sports/olparktennis"><span>올림픽테니스장</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/sports/olparksoccer"><span>올팍축구장</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/sports/ilsansports"><span>일산올림픽스포츠센터</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/sports/bundangsports"><span>분당올림픽스포츠센터</span></a></li>
-                <li><a href="https://www.ksponco.or.kr/spm" target="_blank"><span>온라인수강신청</span></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+                <nav class="site_area">
+                    <div class="list">
+                        <a href="https://www.ksponco.or.kr/"><span>한국체육산업개발(주)</span></a>
+                        <a href="https://www.ksponco.or.kr/olympicpark"><span>올림픽공원</span></a>
+                        <a href="https://www.ksponco.or.kr/sports"><span>스포츠센터</span></a>
+                        <a href="https://www.ksponco.or.kr/boatracepark"><span>미사경정공원</span></a>
+                        <a href="https://www.ksponco.or.kr/lib"><span>지샘터도서관</span></a>
+                        <a href="https://www.ksponco.or.kr/recruit"><span>KSPO&amp;CO채용</span></a>
+                        <a href="https://www.ksponco.or.kr/onlinesports"><span>온라인스포츠센터</span></a>
+                        <a href="https://www.ksponco.or.kr/online" target="_blank"
+                            title="새창으로 열림"><span>온라인예약</span></a>
+                        <a href="https://www.ksponco.or.kr/culture/" target="_blank"
+                            title="새창으로 열림"><span>대관예약</span></a>
+                        <a href="https://www.ksponco.or.kr/spm" target="_blank" title="새창으로 열림"><span>수강신청</span></a>
+                        <a href="https://www.ksponco.or.kr/programProposal?mid=a10201060000"><span>프로그램제안</span></a>
+                    </div>
+                </nav>
+                <nav class="site_area_mobile">
+                    <a href="#siteAreaMobile" class="title" title="패밀리사이트열기">한국체육산업개발<i class="xi-angle-down-min"
+                            aria-hidden="true"></i></a>
+                    <div class="list_wrap" id="siteAreaMobile">
+                        <div class="represent">
+                            <a href="https://www.ksponco.or.kr/"><img
+                                    src="https://www.ksponco.or.kr/sports/img/common/gnb_site_represent.svg"
+                                    alt=""><span>한국체육산업개발(주)</span></a>
+                            <button type="button"><i class="xi-angle-down-min" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="list">
+                            <ul class="group1">
+                                <li><a href="https://www.ksponco.or.kr/olympicpark"><span>올림픽공원</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/boatracepark"><span>미사경정공원</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/lib"><span>지href샘터도서관</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/recruit"><span>KSPO&amp;CO채용</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/onlinesports"><span>온라인스포츠센터</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/online" target="_blank"
+                                        title="새창으로 열림"><span>온라인예약</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/culture/" target="_blank"
+                                        title="새창으로 열림"><span>대관예약</span></a></li>
+                                <li><a
+                                        href="https://www.ksponco.or.kr/programProposal?mid=a10201060000"><span>프로그램제안</span></a>
+                                </li>
+                            </ul>
+                            <ul class="group2">
+                                <li><a href="https://www.ksponco.or.kr/sports"><span>스포츠센터</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/sports/olparkswim"><span>올림픽수영장</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/sports/olparksports"><span>올림픽공원스포츠센터</span></a>
+                                </li>
+                                <li><a href="https://www.ksponco.or.kr/sports/olparktennis"><span>올림픽테니스장</span></a>
+                                </li>
+                                <li><a href="https://www.ksponco.or.kr/sports/olparksoccer"><span>올팍축구장</span></a></li>
+                                <li><a href="https://www.ksponco.or.kr/sports/ilsansports"><span>일산올림픽스포츠센터</span></a>
+                                </li>
+                                <li><a href="https://www.ksponco.or.kr/sports/bundangsports"><span>분당올림픽스포츠센터</span></a>
+                                </li>
+                                <li><a href="https://www.ksponco.or.kr/spm" target="_blank"
+                                        title="새창으로 열림"><span>온라인수강신청</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <div class="gnb_util login">
                     <ul class="nav">
-                        
-                        
-                        
-
-                        
-                            <li><a href="https://www.ksponco.or.kr/memberLogin.es?mid=a10801000000"><i class="icon_login"></i><span>로그인</span></a></li>
-                            <li><a href="https://www.ksponco.or.kr/join.es?mid=a10802000000"><i class="icon_join"></i><span>회원가입</span></a></li>
-                        
+                        <li><a href="https://www.ksponco.or.kr/memberLogin.es?mid=a10801000000"><i class="icon_login"
+                                    aria-hidden="true"></i><span>로그인</span></a></li>
+                        <li><a href="https://www.ksponco.or.kr/join.es?mid=a10802000000"><i class="icon_join"
+                                    aria-hidden="true"></i><span>회원가입</span></a></li>
                     </ul>
                 </div>
             </div>
             <!-- //container -->
         </div>
         <!-- //gnb_site -->
-
         <div class="gnb_area">
             <div class="container">
                 <h1 class="logo">
-                    <a href="https://www.ksponco.or.kr/sports/olparksports" class="link"><span class="sr-only">올림픽공원스포츠센터</span></a>
+                    <a href="https://www.ksponco.or.kr/sports/olparksports" class="link"><span
+                            class="sr-only">올림픽공원스포츠센터</span></a>
                 </h1>
                 <div class="gnb_wrap">
                     <nav class="nav" id="gnb">
                         <h2 class="pop_title">사이트맵</h2>
                         <span class="pop_eng_title" lang="en">Site map</span>
-                        
-<!-- eCMS v3.0 Generator Start. -->
-<ul id="head_menu" class="topmenu">
-    <li class="depth1">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60101000000">
-            <span>종목/강좌</span>
-        </a>
-        <div class="submenu">
-            <div class="title_area">
-                <h3 class="title">종목/강좌</h3>
-            </div>
-            <ul class="depth2">
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60101000000">
-                        강좌안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60102000000">
-                        강사소개
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/onlinesports/list?mid=b60300000000&amp;siteCg=OSC1002" target="_blank" rel="noopener noreferrer" title="새창으로 이동" class="linkWindow">
-                        동영상 강좌
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/webzine/leaflet/olparksports/index.html" target="_blank" rel="noopener noreferrer" title="새창으로 이동" class="linkWindow">
-                        모바일 리플렛
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li class="depth1">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60201000000">
-            <span>이용안내</span>
-        </a>
-        <div class="submenu">
-            <div class="title_area">
-                <h3 class="title">이용안내</h3>
-            </div>
-            <ul class="depth2">
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60201000000">
-                        회원등록안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60203000000">
-                        요금/시간안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60204000000">
-                        일일입장안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60205000000">
-                        할인안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60206000000">
-                        환불/탈퇴/변경
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60207000000">
-                        강습장 출입안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60202000000">
-                        준수/안전수칙
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li class="depth1">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60301000000">
-            <span>커뮤니티</span>
-        </a>
-        <div class="submenu">
-            <div class="title_area">
-                <h3 class="title">커뮤니티</h3>
-            </div>
-            <ul class="depth2">
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60301000000">
-                        공지사항
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60302000000">
-                        이벤트
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60303000000">
-                        자주묻는 질문
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60307000000">
-                        Q&amp;A
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60305000000">
-                        포토 갤러리
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/board.es?mid=a60306000000&amp;bid=0094&amp;cg_cd=C03">
-                        유실물센터
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li class="depth1">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60401000000">
-            <span>모집</span>
-        </a>
-        <div class="submenu">
-            <div class="title_area">
-                <h3 class="title">모집</h3>
-            </div>
-            <ul class="depth2">
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60401000000">
-                        모집공고
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li class="depth1">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60501000000">
-            <span>센터소개</span>
-        </a>
-        <div class="submenu">
-            <div class="title_area">
-                <h3 class="title">센터소개</h3>
-            </div>
-            <ul class="depth2">
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60501000000">
-                        인사말
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60502000000">
-                        시설안내
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60503000000">
-                        업무별 연락처
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000">
-                        찾아오시는 길
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-</ul>
-<!-- eCMS v3.0 Generator End. -->
-
-                        <button type="button" class="pop_close"><i class="xi-close"></i><span class="sr-only">전체메뉴 레이어 닫기</span></button>
+                        <ul id="head_menu" class="topmenu">
+                            <li class="depth1">
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60101000000">
+                                    <span>종목/강좌</span>
+                                </a>
+                                <div class="submenu">
+                                    <div class="title_area">
+                                        <h3 class="title">종목/강좌</h3>
+                                    </div>
+                                    <ul class="depth2">
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60101000000">
+                                                강좌안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60102000000">
+                                                강사소개
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/onlinesports/list?mid=b60300000000&amp;siteCg=OSC1002"
+                                                target="_blank" rel="noopener noreferrer" title="새창으로 이동"
+                                                class="linkWindow">
+                                                동영상 강좌
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/webzine/leaflet/olparksports/index.html"
+                                                target="_blank" rel="noopener noreferrer" title="새창으로 이동"
+                                                class="linkWindow">
+                                                모바일 리플렛
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="depth1">
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60201000000">
+                                    <span>이용안내</span>
+                                </a>
+                                <div class="submenu">
+                                    <div class="title_area">
+                                        <h3 class="title">이용안내</h3>
+                                    </div>
+                                    <ul class="depth2">
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60201000000">
+                                                회원등록안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60203000000">
+                                                요금/시간안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60204000000">
+                                                일일입장안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60205000000">
+                                                할인안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60206000000">
+                                                환불/탈퇴/변경
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60207000000">
+                                                강습장 출입안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60202000000">
+                                                준수/안전수칙
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="depth1">
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60301000000">
+                                    <span>커뮤니티</span>
+                                </a>
+                                <div class="submenu">
+                                    <div class="title_area">
+                                        <h3 class="title">커뮤니티</h3>
+                                    </div>
+                                    <ul class="depth2">
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60301000000">
+                                                공지사항
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60302000000">
+                                                이벤트
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60303000000">
+                                                자주묻는 질문
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60307000000">
+                                                Q&amp;A
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60305000000">
+                                                포토 갤러리
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.ksponco.or.kr/sports/board.es?mid=a60306000000&amp;bid=0094&amp;cg_cd=C03">
+                                                유실물센터
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="depth1">
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60401000000">
+                                    <span>모집</span>
+                                </a>
+                                <div class="submenu">
+                                    <div class="title_area">
+                                        <h3 class="title">모집</h3>
+                                    </div>
+                                    <ul class="depth2">
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60401000000">
+                                                모집공고
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="depth1">
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60501000000">
+                                    <span>센터소개</span>
+                                </a>
+                                <div class="submenu">
+                                    <div class="title_area">
+                                        <h3 class="title">센터소개</h3>
+                                    </div>
+                                    <ul class="depth2">
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60501000000">
+                                                인사말
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60502000000">
+                                                시설안내
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60503000000">
+                                                업무별 연락처
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000">
+                                                찾아오시는 길
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                        <button type="button" class="pop_close"><i class="xi-close"></i><span class="sr-only">전체메뉴 레이어
+                                닫기</span></button>
                     </nav>
                 </div>
                 <!-- //gnb_wrap  -->
@@ -316,8 +2787,8 @@
                         <i class="xi-search"></i><span class="sr-only">검색버튼</span><!-- 모바일 검색버튼-->
                     </button>
                     <div class="sch_layer">
-                        <!-- <form class="sch_form" name="sch_form" id="schForm" action="https://www.ksponco.or.kr/totalSearch"> -->
-                        <form class="sch_form" name="sch_form" id="schForm" action="https://www.ksponco.or.kr/search/front/Search.jsp">
+                        <form class="sch_form" name="sch_form" id="schForm"
+                            action="https://www.ksponco.or.kr/search/front/Search.jsp">
                             <label for="allKeyWord" class="title sr-only">통합검색</label>
                             <input type="text" name="qt" id="allKeyWord" placeholder="검색어를 입력해주세요">
                             <button id="btnSch" class="btn_sch">
@@ -328,7 +2799,8 @@
                             <i class="xi-close-thin"></i><span class="sr-only">검색 닫기</span>
                         </button>
                     </div><!-- //sch_layer -->
-                    <button type="button" class="btn_allmenu"><span class="sr-only">전체메뉴보기</span><i class="icon" aria-hidden="true"></i></button>
+                    <button type="button" class="btn_allmenu"><span class="sr-only">전체메뉴보기</span><i class="icon"
+                            aria-hidden="true"></i></button>
                 </div>
                 <!-- //btn_wrap -->
             </div>
@@ -338,478 +2810,506 @@
     </header>
 
     <main class="main">
-        
-            
-    <div id="quick" class="quick">
-        <h2 class="sr-only">Quick</h2>
-        <nav>
-            <ul>
-    <li class="item_1">
-        <a href="https://www.ksponco.or.kr/sports/courses?mid=a60101000000"
-           target="_self"
-        >
-		<i aria-hidden="true" style="background-image:url(/sports/upload/quick/a6/20220627172139762.png)"></i><span>프로그램안내</span>
-        </a>
-    </li>
-    <li class="item_2">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60205000000"
-           target="_self"
-        >
-		<i aria-hidden="true" style="background-image:url(/sports/upload/quick/a6/20220627172144804.png)"></i><span>할인안내</span>
-        </a>
-    </li>
-    <li class="item_3">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60401000000"
-           target="_self"
-        >
-		<i aria-hidden="true" style="background-image:url(/sports/upload/quick/a6/20220627172150613.png)"></i><span>모집공고</span>
-        </a>
-    </li>
-    <li class="item_4">
-        <a href="https://www.ksponco.or.kr/sports/board.es?mid=a60303000000&amp;bid=0081"
-           target="_self"
-        >
-		<i aria-hidden="true" style="background-image:url(/sports/upload/quick/a6/20220627172155356.png)"></i><span>자주묻는질문</span>
-        </a>
-    </li>
-    <li class="item_5">
-        <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000"
-           target="_self"
-        >
-		<i aria-hidden="true" style="background-image:url(/sports/upload/quick/a6/20220627172200590.png)"></i><span>찾아오시는길</span>
-        </a>
-    </li>
+        <div id="quick" class="quick">
+            <h2 class="sr-only">Quick</h2>
+            <nav>
+                <ul>
+                    <li class="item_1"> <a href="https://www.ksponco.or.kr/sports/courses?mid=a60101000000"
+                            target="_self"> <i aria-hidden="true"
+                                style="background-image:url(/sports/upload/quick/a6/20220627172139762.png)"></i><span>프로그램안내</span>
+                        </a>
+                    </li>
+                    <li class="item_2"> <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60205000000"
+                            target="_self"> <i aria-hidden="true"
+                                style="background-image:url(/sports/upload/quick/a6/20220627172144804.png)"></i><span>할인안내</span>
+                        </a>
+                    </li>
+                    <li class="item_3"> <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60401000000"
+                            target="_self"> <i aria-hidden="true"
+                                style="background-image:url(/sports/upload/quick/a6/20220627172150613.png)"></i><span>모집공고</span>
+                        </a>
+                    </li>
+                    <li class="item_4"> <a
+                            href="https://www.ksponco.or.kr/sports/board.es?mid=a60303000000&amp;bid=0081"
+                            target="_self"> <i aria-hidden="true"
+                                style="background-image:url(/sports/upload/quick/a6/20220627172155356.png)"></i><span>자주묻는질문</span>
+                        </a>
+                    </li>
+                    <li class="item_5"> <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000"
+                            target="_self"> <i aria-hidden="true"
+                                style="background-image:url(/sports/upload/quick/a6/20220627172200590.png)"></i><span>찾아오시는길</span>
+                        </a>
+                    </li>
 
 
-    
-    
-    
-    
-    
-</ul>
 
 
-        </nav>
-    </div>
 
-            <!-- //quick -->
-            <div class="acctoggle">
-                <button type="button" class="acctoggle_contrast">
-                    <i class="xi-contrast"></i>
-                    <span>흑백<br>모드</span>
-                </button>
-                <button type="button" class="acctoggle_fontsize">
-                    <i class="xi-text-size"></i>
-                    <span>글자<br>크기</span>
-                </button>
-            </div>
-            <!-- //acctoggle -->
-        
+
+
+                </ul>
+
+
+            </nav>
+        </div>
+
+        <!-- //quick -->
+        <div class="acctoggle">
+            <button type="button" class="acctoggle_contrast">
+                <i class="xi-contrast"></i>
+                <span>흑백<br>모드</span>
+            </button>
+            <button type="button" class="acctoggle_fontsize">
+                <i class="xi-text-size"></i>
+                <span>글자<br>크기</span>
+            </button>
+        </div>
+        <!-- //acctoggle -->
+
         <div id="content">
-            
-    
-
-<div class="section section01 visual_section">
-    <h2 class="sr-only">visual_section</h2>
-    <div class="container">
-        <!-- 비주얼 콘텐츠 영역 -->
-
-        <div class="visual">
-            <div class="list">
-	<p class="item">
-		<!-- <a th:with="url=${#strings.isEmpty(rs.link_url) ? '#' : rs.link_url}" th:href="${url}" th:target="${rs.target}" th:title="${rs.target eq '_blank' ? '새창' : ''}" th:rel="${rs.target eq '_blank' ? 'noopener' : ''}"https://www.ksponco.or.kr/>
-			<img th:src="@{/upload/visual/__${rs.sid}__/__${rs.img}__}" th:alt="${rs.title}" th:attr="onerror=|this.onerror=null; this.src='@{/error/img/noimage.jpg}'|" />
-		</a> -->
-		
-		
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=81348&amp;act=view" target="_self"https://www.ksponco.or.kr/>
-				<img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250715144735679.png">
-			</a>
-			
-		
-	</p>
-	<p class="item">
-		<!-- <a th:with="url=${#strings.isEmpty(rs.link_url) ? '#' : rs.link_url}" th:href="${url}" th:target="${rs.target}" th:title="${rs.target eq '_blank' ? '새창' : ''}" th:rel="${rs.target eq '_blank' ? 'noopener' : ''}"https://www.ksponco.or.kr/>
-			<img th:src="@{/upload/visual/__${rs.sid}__/__${rs.img}__}" th:alt="${rs.title}" th:attr="onerror=|this.onerror=null; this.src='@{/error/img/noimage.jpg}'|" />
-		</a> -->
-		
-		
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=78914&amp;act=view" target="_self"https://www.ksponco.or.kr/>
-				<img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250102092210646.png">
-			</a>
-			
-		
-	</p>
-	<p class="item">
-		<!-- <a th:with="url=${#strings.isEmpty(rs.link_url) ? '#' : rs.link_url}" th:href="${url}" th:target="${rs.target}" th:title="${rs.target eq '_blank' ? '새창' : ''}" th:rel="${rs.target eq '_blank' ? 'noopener' : ''}"https://www.ksponco.or.kr/>
-			<img th:src="@{/upload/visual/__${rs.sid}__/__${rs.img}__}" th:alt="${rs.title}" th:attr="onerror=|this.onerror=null; this.src='@{/error/img/noimage.jpg}'|" />
-		</a> -->
-		
-		
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=78915&amp;act=view" target="_self"https://www.ksponco.or.kr/>
-				<img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250102092146045.png">
-			</a>
-			
-		
-	</p>
-	<p class="item">
-		<!-- <a th:with="url=${#strings.isEmpty(rs.link_url) ? '#' : rs.link_url}" th:href="${url}" th:target="${rs.target}" th:title="${rs.target eq '_blank' ? '새창' : ''}" th:rel="${rs.target eq '_blank' ? 'noopener' : ''}"https://www.ksponco.or.kr/>
-			<img th:src="@{/upload/visual/__${rs.sid}__/__${rs.img}__}" th:alt="${rs.title}" th:attr="onerror=|this.onerror=null; this.src='@{/error/img/noimage.jpg}'|" />
-		</a> -->
-		
-		
-			<a href="https://chatbot.ksponco.ieabot.com/sports/olparksports?company=올림픽공원스포츠센터" target="_blank" title="새창" rel="noopener"https://www.ksponco.or.kr/>
-				<img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250915152554752.jpg">
-			</a>
-			
-		
-	</p>
-	<p class="item">
-		<!-- <a th:with="url=${#strings.isEmpty(rs.link_url) ? '#' : rs.link_url}" th:href="${url}" th:target="${rs.target}" th:title="${rs.target eq '_blank' ? '새창' : ''}" th:rel="${rs.target eq '_blank' ? 'noopener' : ''}"https://www.ksponco.or.kr/>
-			<img th:src="@{/upload/visual/__${rs.sid}__/__${rs.img}__}" th:alt="${rs.title}" th:attr="onerror=|this.onerror=null; this.src='@{/error/img/noimage.jpg}'|" />
-		</a> -->
-		
-		
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=75032&amp;act=view" target="_self"https://www.ksponco.or.kr/>
-				<img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20230918153042578.png">
-			</a>
-			
-		
-	</p>
-	
-	
-	
-	
-	
-</div>
 
 
-        </div>
 
-        <p class="cscenter">
-    <span class="txt">
-        <strong>고객지원</strong>
-        <small>매월 두번째 일요일 휴관</small>
-    </span>
-    <span class="btn">
-        <a class="btn type" href="https://chatbot.ksponco.ieabot.com/sports/olparksports?company=올림픽공원스포츠센터" onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;" title="새창으로 열림">
-            <img src="https://www.ksponco.or.kr/sports/img/main/chatbot_sports.png" alt="">스포츠센터 챗봇
-        </a>
-        <!--
-        <a class="btn type" href="https://chatbot.gov.kt-aicc.com/client/ACTIVE/simulator.html?botCode=GCL-05-C-00000005&channelId=86ab42e0493841d2886422d484dcf18e&userKey=올림픽&callForwardingNumber=" onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;" title="새창으로 열림">
-            <img src="https://www.ksponco.or.kr/sports/img/main/chatbot_sports.png" alt="">스포츠센터 챗봇
-        </a>
-        -->
-    </span>
-</p>
+            <div class="section section01 visual_section">
+                <h2 class="sr-only">visual_section</h2>
+                <div class="container">
+                    <!-- 비주얼 콘텐츠 영역 -->
 
-        <article class="guide">
-            <h3 class="title">안내 및 조회</h3>
-            <ul>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60203000000">
-                        <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/guide1.png" alt=""></i>
-                        <span>요금/시간안내</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60204000000">
-                        <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/guide2.png" alt=""></i>
-                        <span>일일입장안내</span>
-                    </a>
-                </li>
-                <li>
-					<a href="https://www.ksponco.or.kr/spm/reservationStatus/waitList.do?scId=1" onclick="window.open(this.href, 'swimming', 'width=1000,height=800,scrollbars=1'); return false;">
-						<i><img src="https://www.ksponco.or.kr/sports/img/olparksports/guide3.png" alt=""></i>
-                        <span>실시간등록현황</span>
-                    </a>
-                    <!-- <a href="#" onclick="alert('실시간 등록현황 제공을 임시 중단하오니\n회원 여러분들의 양해와 협조 부탁드립니다.'); return false;">
-                        <i><img th:src="@{/img/olparksports/guide3.png}" src="../../../resources/img/main/guide3.png" alt=""></i>
-                        <span>실시간등록현황</span>
+                    <div class="visual">
+                        <div class="list">
+                            <p class="item">
+                                <a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=81348&amp;act=view"
+                                    target="_self">
+                                <img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250715144735679.png">
+                                </a>
+
+
+                            </p>
+                            <p class="item">
+
+
+                                <a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=78914&amp;act=view"
+                                    target="_self">
+                                <img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250102092210646.png">
+                                </a>
+
+                            </p>
+                            <p class="item">
+                                <a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=78915&amp;act=view"
+                                    target="_self">
+                                <img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250102092146045.png">
+                                </a>
+
+
+                            </p>
+                            <p class="item">
+                                <a href="https://chatbot.ksponco.ieabot.com/sports/olparksports?company=올림픽공원스포츠센터"
+                                    target="_blank" title="새창" rel="noopener">
+                                <img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20250915152554752.jpg">
+                                </a>
+
+
+                            </p>
+                            <p class="item">
+                                <!-- <a th:with="url=${#strings.isEmpty(rs.link_url) ? '#' : rs.link_url}" th:href="${url}" th:target="${rs.target}" th:title="${rs.target eq '_blank' ? '새창' : ''}" th:rel="${rs.target eq '_blank' ? 'noopener' : ''}"https://www.ksponco.or.kr/>
+                        <img th:src="@{/upload/visual/__${rs.sid}__/__${rs.img}__}" th:alt="${rs.title}" th:attr="onerror=|this.onerror=null; this.src='@{/error/img/noimage.jpg}'|" />
                     </a> -->
-                </li>
-            </ul>
-            <div class="btn">
-                <a class="online_class" href="https://www.ksponco.or.kr/spm/index.do" target="_blank">온라인 수강신청 바로가기</a>
+
+
+                                <a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=75032&amp;act=view"
+                                    target="_self">
+                                <img src="https://www.ksponco.or.kr/sports/upload/visual/a6/20230918153042578.png">
+                                </a>
+
+
+                            </p>
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                    <p class="cscenter">
+                        <span class="txt">
+                            <strong>고객지원</strong>
+                            <small>매월 두번째 일요일 휴관</small>
+                        </span>
+                        <span class="btn">
+                            <a class="btn type"
+                                href="https://chatbot.ksponco.ieabot.com/sports/olparksports?company=올림픽공원스포츠센터"
+                                onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;"
+                                title="새창으로 열림">
+                                <img src="https://www.ksponco.or.kr/sports/img/main/chatbot_sports.png" alt="">스포츠센터 챗봇
+                            </a>
+                            <!--
+                    <a class="btn type" href="https://chatbot.gov.kt-aicc.com/client/ACTIVE/simulator.html?botCode=GCL-05-C-00000005&channelId=86ab42e0493841d2886422d484dcf18e&userKey=올림픽&callForwardingNumber=" onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;" title="새창으로 열림">
+                        <img src="https://www.ksponco.or.kr/sports/img/main/chatbot_sports.png" alt="">스포츠센터 챗봇
+                    </a>
+                    -->
+                        </span>
+                    </p>
+
+                    <article class="guide">
+                        <h3 class="title">안내 및 조회</h3>
+                        <ul>
+                            <li>
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60203000000">
+                                    <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/guide1.png"
+                                            alt=""></i>
+                                    <span>요금/시간안내</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60204000000">
+                                    <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/guide2.png"
+                                            alt=""></i>
+                                    <span>일일입장안내</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.ksponco.or.kr/spm/reservationStatus/waitList.do?scId=1"
+                                    onclick="window.open(this.href, 'swimming', 'width=1000,height=800,scrollbars=1'); return false;">
+                                    <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/guide3.png"
+                                            alt=""></i>
+                                    <span>실시간등록현황</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="btn">
+                            <a class="online_class" href="https://www.ksponco.or.kr/spm/index.do" target="_blank">온라인
+                                수강신청 바로가기</a>
+                        </div>
+                    </article>
+
+                    <ul class="icon">
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60201000000" class="type1">
+                                <em>회원</em>
+                                <i><img src="https://www.ksponco.or.kr/sports/img/main/icon1.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/main/icon1.png" alt=""></i>
+                                <span>회원등록안내</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60202000000" class="type1">
+                                <em>회원</em>
+                                <i><img src="https://www.ksponco.or.kr/sports/img/main/icon2.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/main/icon2.png" alt=""></i>
+                                <span>준수/안전수칙</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60102000000" class="type2">
+                                <!-- <em>10월</em> -->
+                                <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/icon3.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/olparksports/icon3.png" alt=""></i>
+                                <span>강사안내</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/onlinesports/list?mid=b60300000000&siteCg=OSC1002"
+                                target="_blank">
+                                <i><img src="https://www.ksponco.or.kr/sports/img/main/icon4.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/main/icon4.png" alt=""></i>
+                                <span>동영상강좌</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000#tab3">
+                                <i><img src="https://www.ksponco.or.kr/sports/img/main/icon5.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/main/icon5.png" alt=""></i>
+                                <span>주차안내</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60502000000">
+                                <i><img src="https://www.ksponco.or.kr/sports/img/main/icon6.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/main/icon6.png" alt=""></i>
+                                <span>시설안내</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60305000000">
+                                <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/icon7.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/olparksports/icon7.png" alt=""></i>
+                                <span>포토갤러리</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000">
+                                <i><img src="https://www.ksponco.or.kr/sports/img/main/icon8.png" alt=""><img
+                                        src="https://www.ksponco.or.kr/sports/img/main/icon8.png" alt=""></i>
+                                <span>오시는길</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //container -->
             </div>
+            <!-- //section01 -->
+            <div class="contents_section">
+                <section class="section section02">
+                    <h2 class="sr-only">section02</h2>
+                    <div class="container">
+                        <article class="group notice">
+                            <h3 class="title">공지사항</h3>
+                            <ul class="list">
+                                <li>
+                                    <a
+                                        href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82295&amp;act=view">
+                                        <em>공지</em>
+                                        <strong>
+                                            💡올팍축구장 풋살경기 대관 OPEN💡
+                                        </strong>
+                                        <span>
+                                            2025-10-29
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82279&amp;act=view">
+                                        <em>공지</em>
+                                        <strong>
+                                            올림픽공원스포츠센터 11월 주차혼잡안내
+                                        </strong>
 
-            <!-- <a th:href="@{/menu.es?mid=a60105000000}" class="more">실시간 등록현황</a> -->
-        </article>
+                                        <span>
+                                            2025-10-27
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82278&amp;act=view">
+                                        <em>공지</em>
+                                        <strong>
+                                            올림픽공원스포츠센터 11월 휴관안내
+                                        </strong>
 
-        <ul class="icon">
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60201000000" class="type1">
-                    <em>회원</em>
-                    <i><img src="https://www.ksponco.or.kr/sports/img/main/icon1.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/main/icon1.png" alt=""></i>
-                    <span>회원등록안내</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60202000000" class="type1">
-                    <em>회원</em>
-                    <i><img src="https://www.ksponco.or.kr/sports/img/main/icon2.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/main/icon2.png" alt=""></i>
-                    <span>준수/안전수칙</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60102000000" class="type2">
-                    <!-- <em>10월</em> -->
-                    <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/icon3.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/olparksports/icon3.png" alt=""></i>
-                    <span>강사안내</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/onlinesports/list?mid=b60300000000&siteCg=OSC1002" target="_blank">
-                    <i><img src="https://www.ksponco.or.kr/sports/img/main/icon4.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/main/icon4.png" alt=""></i>
-                    <span>동영상강좌</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000#tab3">
-                    <i><img src="https://www.ksponco.or.kr/sports/img/main/icon5.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/main/icon5.png" alt=""></i>
-                    <span>주차안내</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60502000000">
-                    <i><img src="https://www.ksponco.or.kr/sports/img/main/icon6.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/main/icon6.png" alt=""></i>
-                    <span>시설안내</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60305000000">
-                    <i><img src="https://www.ksponco.or.kr/sports/img/olparksports/icon7.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/olparksports/icon7.png" alt=""></i>
-                    <span>포토갤러리</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000">
-                    <i><img src="https://www.ksponco.or.kr/sports/img/main/icon8.png" alt=""><img src="https://www.ksponco.or.kr/sports/img/main/icon8.png" alt=""></i>
-                    <span>오시는길</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- //container -->
-</div>
-<!-- //section01 -->
-<div class="contents_section">
-    <section class="section section02">
-        <h2 class="sr-only">section02</h2>
-        <div class="container">
-            <article class="group notice">
-                <h3 class="title">공지사항</h3>
-                <ul class="list">
-	
-		<!--		<fmt:parseDate value="${rs.reg_date}" var="reg_date" pattern="yyyyMMdd"https://www.ksponco.or.kr/>-->
-		<li>
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82295&amp;act=view">
-				<em>공지</em>
-				<strong>
-					💡올팍축구장 풋살경기 대관 OPEN💡
-				</strong>
-				
-				<span>
-					2025-10-29
-				</span>
-			</a>
-		</li>
-		<li>
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82279&amp;act=view">
-				<em>공지</em>
-				<strong>
-					올림픽공원스포츠센터 11월 주차혼잡안내
-				</strong>
-				
-				<span>
-					2025-10-27
-				</span>
-			</a>
-		</li>
-		<li>
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82278&amp;act=view">
-				<em>공지</em>
-				<strong>
-					올림픽공원스포츠센터 11월 휴관안내
-				</strong>
-				
-				<span>
-					2025-10-27
-				</span>
-			</a>
-		</li>
-		<li>
-			<a href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82215&amp;act=view">
-				<strong>
-					2025년 10월 상호존중의 날 운영 안내
-				</strong>
-				
-				<span>
-					2025-10-22
-				</span>
-			</a>
-		</li>
-	
-	
-	
-	
-	
-</ul>
-                <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60301000000" class="more">더보기</a>
-            </article>
+                                        <span>
+                                            2025-10-27
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.ksponco.or.kr/sports/board.es?mid=a60301000000&amp;bid=0005&amp;list_no=82215&amp;act=view">
+                                        <strong>
+                                            2025년 10월 상호존중의 날 운영 안내
+                                        </strong>
 
-            <article class="group popupzone">
-                <h3 class="title">팝업존</h3>
-                <div class="list">
-	<p class="item"><a href="https://www.ksponco.or.kr/programProposal?mid=a10201060000" target="_blank" title="새창" rel="noopener"><img src="https://www.ksponco.or.kr/sports/upload/popupzone/a6/20250102140525800.jpg"</a></p>
-	<p class="item"><a href="https://www.youtube.com/@olympicsportscenter" target="_blank" title="새창" rel="noopener"><img src="https://www.ksponco.or.kr/sports/upload/popupzone/a6/20220523102247390.png"></a></p>
-
-	
-	
-	
-</div>
+                                        <span>
+                                            2025-10-22
+                                        </span>
+                                    </a>
+                                </li>
 
 
-            </article>
-        </div><!-- //container -->
-    </section>
-    <section class="section section03">
-        <h2 class="sr-only">section03</h2>
-        <div class="container">
-            <article class="group class">
-                <h3 class="title">추천강좌</h3>
-                
-    <div class="list" data-slick='{"variableWidth": true }'>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/195?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=72698c5a-859f-4795-94d9-dd68c147ff59&amp;seq=5" alt="로드사이클"></i>
-                <strong>로드사이클</strong>
-                <span>로드사이클은 자전거를 개인의 몸에 맞추는 피팅, 효율적인 페달링, 호흡 테크닉 등을 배울 수 있는 프로그램입니다. 개인 자전거를 평롤러, 고정롤러를 이용하여 실내에서 눈, 비, 미세먼지에 영향을 받지 않고 사이클을 즐길 수 있는 프로그램입니다.  &lt;/p&gt;</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/177?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=10442761-2e29-4872-b024-d989cc12f984&amp;seq=1" alt="모델워킹"></i>
-                <strong>모델워킹</strong>
-                <span>모델워킹은 신나는 음악에 맞춰 당당히 워킹 및 포즈를 취하며 자신감을 키우고 바른 자세를 유지하는 데 도움을 주는 운동입니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/79?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=226aee9a-f2c4-4452-a03f-f72d73353536&amp;seq=1" alt="배드민턴"></i>
-                <strong>배드민턴</strong>
-                <span>배드민턴은 공이 날아오는 방향으로 빠르게 움직여 민첩성과 집중력 향상에 큰 도움을 주고 공을 치는 격한 움직임으로 스트레스 해소에 탁월합니다. 또한 고강도의 무산소 운동과 유산소 운동을 동시에 하는 전신운동으로 호흡 순환계 발달에 큰 효과를 주는 운동입니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/80?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=16aaf079-a1b0-428b-91c0-e6c939e2a3bb&amp;seq=1" alt="탁구"></i>
-                <strong>탁구</strong>
-                <span>탁구는 부상위험이 적은 안전한 운동 중 하나로 공의 방향과 속도를 가늠하는 두뇌 운동이기 때문에 순발력과 반응시간, 판단력이 좋아져 치매 예방에 도움을 줍니다. 또한 전신 운동으로서 근지구력을 기르는데 탁월한 운동입니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/72?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=b957b968-b38f-46d2-b708-d740d138cf0a&amp;seq=1" alt="당구"></i>
-                <strong>당구</strong>
-                <span>당구는 지적 흥미를 유발하는 두뇌게임의 성격이 강하고 과격하지 않아, 남녀노소 누구나 즐길 수 있는 품위 있는 레저스포츠입니다. 올림픽공원스포츠센터는 성인 남성은 물론 여성이나 청소년들이 당구의 기본기를 체계적으로 익히며 당구를 즐길 수 있도록 체계적인 강습 프로그램을 운영하고 있습니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/77?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=2a407e00-634e-4c3b-8216-4f1155f82143&amp;seq=1" alt="골프"></i>
-                <strong>골프</strong>
-                <span>골프는 최대 45.93g의 작은 공을 클럽[골프채]로 쳐서 홀 안에 집어 넣는 스포츠로, 상대방보다 적은 타수로 공을 홀에 넣기만 하면 이기는 경기입니다. 얼핏 생각하기에 매우 단순해 보이지만, 골프는 경기 내내 예측할 수 없는 장애물에 봉착하게 된다는 점에서 흔히 인생에 비유됩니다. 소재와 모양, 용도가 다른 14개의 클럽과 18개의 홀, 날씨와 같은 자연환경, 그리고 저마다 갈고닦은 기량으로 무장한 상대 골퍼들, 이 모두를 이겨내야 승리의 기쁨을 맛볼 수 있습니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/81?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=d1b2adea-575c-4d4b-99ca-edd028eadf09&amp;seq=1" alt="헬스"></i>
-                <strong>헬스</strong>
-                <span>헬스는 유연성 향상 및 운동상해 예방을 위한 스트레칭과 체조, 무산소 운동인 웨이트 트레이닝(weight training), 그리고 조깅, 사이클 등의 유산소 운동을 병행함으로써 건강하고 균형 잡힌 신체를 가꾸는 데 기본이 되는 운동입니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/75?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=286f54f5-cff4-4a77-b65e-61ca24a9628d&amp;seq=2" alt="검도"></i>
-                <strong>검도</strong>
-                <span>검도는 죽도를 이용하여 상대방을 가격함으로써 승부를 겨루는 투기 스포츠입니다. 경기는 단체전(5인조, 7인조)과 개인전으로 구분되는데, 죽도로 상대방의 유효격자 부위(머리, 손목, 허리, 목)을 정확하게 가격하면 득점으로 인정되며, 제한시간(5분 원칙) 내에 두 판을 먼저 이겨야 승리합니다. 검도는 발을 끊임없이 움직이기 때문에 다리와 엉덩이의 근육 사용량이 많아 힙업 등의 하체발달에 효과를 얻을 수 있습니다. *수강 시 개인 장비 지참 필요</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/74?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=fe478072-5459-4215-ad75-faea77cd0be6&amp;seq=1" alt="요가"></i>
-                <strong>요가</strong>
-                <span>요가는 명상과 호흡, 스트레칭 등이 결합된 복합적인 심신 수련 방법으로 긴장과 스트레스를 해소하고 몸과 마음의 건강을 유지할 수 있도록 도와주는 생활스포츠입니다. 요가는 몸의 군살을 제거해주고 라인을 날씬하게 잡아주는데 도움을 줍니다. 또한 유연성 및 자세교정, 혈액순환에도 도움이 되고 심신을 안정시키는 효과까지 있는 운동입니다.</span>
-            </a>
-        </div>
-        <div class="item">
-            <a href="https://www.ksponco.or.kr/sports/courses/78?mid=a60101000000">
-                <i><img src="https://www.ksponco.or.kr/sports/files/view?id=94d85c34-0498-4edf-b472-eccb1ffc09f8&amp;seq=4" alt="댄스스포츠"></i>
-                <strong>댄스스포츠</strong>
-                <span>댄스스포츠는 모던댄스와 라틴댄스로 나뉘며, 모던댄스(modern dance)는 왈츠, 비엔나왈츠, 탱고, 퀵스텝, 폭스트롯으로 구분되어 체지방 감량과 자세교정 효과가 탁월해 품위 있고 아름다운 몸매를 가꾸는데 효과적이며, 라틴댄스는 룸바, 차차차, 삼바, 파소도블레, 자이브 등을 쉽고 재미있게 배울 수 있는 프로그램으로 운동량이 많아 체지방 감량에 탁월한 효과와 스트레스를 해소하고 생활의 활력을 유지하는 데 큰 도움을 줍니다.</span>
-            </a>
-        </div>
-    </div>
-    
 
-            </article>
-        </div>
-        <!-- //container -->
-    </section>
-</div>
-<!-- //content_section -->
+
+
+                            </ul>
+                            <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60301000000" class="more">더보기</a>
+                        </article>
+
+                        <article class="group popupzone">
+                            <h3 class="title">팝업존</h3>
+                            <div class="list">
+                                <p class="item"><a href="https://www.ksponco.or.kr/programProposal?mid=a10201060000"
+                                        target="_blank" title="새창" rel="noopener"><img
+                                            src="https://www.ksponco.or.kr/sports/upload/popupzone/a6/20250102140525800.jpg"
+                                            </a></p>
+                                <p class="item"><a href="https://www.youtube.com/@olympicsportscenter" target="_blank"
+                                        title="새창" rel="noopener"><img
+                                            src="https://www.ksponco.or.kr/sports/upload/popupzone/a6/20220523102247390.png"></a>
+                                </p>
+
+
+
+
+                            </div>
+
+
+                        </article>
+                    </div><!-- //container -->
+                </section>
+                <section class="section section03">
+                    <h2 class="sr-only">section03</h2>
+                    <div class="container">
+                        <article class="group class">
+                            <h3 class="title">추천강좌</h3>
+
+                            <div class="list" data-slick='{"variableWidth": true }'>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/195?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=72698c5a-859f-4795-94d9-dd68c147ff59&amp;seq=5"
+                                                alt="로드사이클"></i>
+                                        <strong>로드사이클</strong>
+                                        <span>로드사이클은 자전거를 개인의 몸에 맞추는 피팅, 효율적인 페달링, 호흡 테크닉 등을 배울 수 있는 프로그램입니다. 개인 자전거를
+                                            평롤러, 고정롤러를 이용하여 실내에서 눈, 비, 미세먼지에 영향을 받지 않고 사이클을 즐길 수 있는 프로그램입니다.
+                                            &lt;/p&gt;</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/177?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=10442761-2e29-4872-b024-d989cc12f984&amp;seq=1"
+                                                alt="모델워킹"></i>
+                                        <strong>모델워킹</strong>
+                                        <span>모델워킹은 신나는 음악에 맞춰 당당히 워킹 및 포즈를 취하며 자신감을 키우고 바른 자세를 유지하는 데 도움을 주는
+                                            운동입니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/79?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=226aee9a-f2c4-4452-a03f-f72d73353536&amp;seq=1"
+                                                alt="배드민턴"></i>
+                                        <strong>배드민턴</strong>
+                                        <span>배드민턴은 공이 날아오는 방향으로 빠르게 움직여 민첩성과 집중력 향상에 큰 도움을 주고 공을 치는 격한 움직임으로 스트레스 해소에
+                                            탁월합니다. 또한 고강도의 무산소 운동과 유산소 운동을 동시에 하는 전신운동으로 호흡 순환계 발달에 큰 효과를 주는
+                                            운동입니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/80?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=16aaf079-a1b0-428b-91c0-e6c939e2a3bb&amp;seq=1"
+                                                alt="탁구"></i>
+                                        <strong>탁구</strong>
+                                        <span>탁구는 부상위험이 적은 안전한 운동 중 하나로 공의 방향과 속도를 가늠하는 두뇌 운동이기 때문에 순발력과 반응시간, 판단력이 좋아져
+                                            치매 예방에 도움을 줍니다. 또한 전신 운동으로서 근지구력을 기르는데 탁월한 운동입니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/72?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=b957b968-b38f-46d2-b708-d740d138cf0a&amp;seq=1"
+                                                alt="당구"></i>
+                                        <strong>당구</strong>
+                                        <span>당구는 지적 흥미를 유발하는 두뇌게임의 성격이 강하고 과격하지 않아, 남녀노소 누구나 즐길 수 있는 품위 있는 레저스포츠입니다.
+                                            올림픽공원스포츠센터는 성인 남성은 물론 여성이나 청소년들이 당구의 기본기를 체계적으로 익히며 당구를 즐길 수 있도록 체계적인 강습
+                                            프로그램을 운영하고 있습니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/77?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=2a407e00-634e-4c3b-8216-4f1155f82143&amp;seq=1"
+                                                alt="골프"></i>
+                                        <strong>골프</strong>
+                                        <span>골프는 최대 45.93g의 작은 공을 클럽[골프채]로 쳐서 홀 안에 집어 넣는 스포츠로, 상대방보다 적은 타수로 공을 홀에 넣기만
+                                            하면 이기는 경기입니다. 얼핏 생각하기에 매우 단순해 보이지만, 골프는 경기 내내 예측할 수 없는 장애물에 봉착하게 된다는 점에서 흔히
+                                            인생에 비유됩니다. 소재와 모양, 용도가 다른 14개의 클럽과 18개의 홀, 날씨와 같은 자연환경, 그리고 저마다 갈고닦은 기량으로
+                                            무장한 상대 골퍼들, 이 모두를 이겨내야 승리의 기쁨을 맛볼 수 있습니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/81?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=d1b2adea-575c-4d4b-99ca-edd028eadf09&amp;seq=1"
+                                                alt="헬스"></i>
+                                        <strong>헬스</strong>
+                                        <span>헬스는 유연성 향상 및 운동상해 예방을 위한 스트레칭과 체조, 무산소 운동인 웨이트 트레이닝(weight training), 그리고
+                                            조깅, 사이클 등의 유산소 운동을 병행함으로써 건강하고 균형 잡힌 신체를 가꾸는 데 기본이 되는 운동입니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/75?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=286f54f5-cff4-4a77-b65e-61ca24a9628d&amp;seq=2"
+                                                alt="검도"></i>
+                                        <strong>검도</strong>
+                                        <span>검도는 죽도를 이용하여 상대방을 가격함으로써 승부를 겨루는 투기 스포츠입니다. 경기는 단체전(5인조, 7인조)과 개인전으로
+                                            구분되는데, 죽도로 상대방의 유효격자 부위(머리, 손목, 허리, 목)을 정확하게 가격하면 득점으로 인정되며, 제한시간(5분 원칙) 내에
+                                            두 판을 먼저 이겨야 승리합니다. 검도는 발을 끊임없이 움직이기 때문에 다리와 엉덩이의 근육 사용량이 많아 힙업 등의 하체발달에 효과를
+                                            얻을 수 있습니다. *수강 시 개인 장비 지참 필요</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/74?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=fe478072-5459-4215-ad75-faea77cd0be6&amp;seq=1"
+                                                alt="요가"></i>
+                                        <strong>요가</strong>
+                                        <span>요가는 명상과 호흡, 스트레칭 등이 결합된 복합적인 심신 수련 방법으로 긴장과 스트레스를 해소하고 몸과 마음의 건강을 유지할 수
+                                            있도록 도와주는 생활스포츠입니다. 요가는 몸의 군살을 제거해주고 라인을 날씬하게 잡아주는데 도움을 줍니다. 또한 유연성 및 자세교정,
+                                            혈액순환에도 도움이 되고 심신을 안정시키는 효과까지 있는 운동입니다.</span>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://www.ksponco.or.kr/sports/courses/78?mid=a60101000000">
+                                        <i><img src="https://www.ksponco.or.kr/sports/files/view?id=94d85c34-0498-4edf-b472-eccb1ffc09f8&amp;seq=4"
+                                                alt="댄스스포츠"></i>
+                                        <strong>댄스스포츠</strong>
+                                        <span>댄스스포츠는 모던댄스와 라틴댄스로 나뉘며, 모던댄스(modern dance)는 왈츠, 비엔나왈츠, 탱고, 퀵스텝, 폭스트롯으로
+                                            구분되어 체지방 감량과 자세교정 효과가 탁월해 품위 있고 아름다운 몸매를 가꾸는데 효과적이며, 라틴댄스는 룸바, 차차차, 삼바,
+                                            파소도블레, 자이브 등을 쉽고 재미있게 배울 수 있는 프로그램으로 운동량이 많아 체지방 감량에 탁월한 효과와 스트레스를 해소하고 생활의
+                                            활력을 유지하는 데 큰 도움을 줍니다.</span>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </article>
+                    </div>
+                    <!-- //container -->
+                </section>
+            </div>
+            <!-- //content_section -->
 
 
 
         </div>
         <!-- //content -->
-        
-            <button type="button" class="go_top"><i class="xi-arrow-up"></i><span>TOP</span></button>
-        
+
+        <button type="button" class="go_top"><i class="xi-arrow-up"></i><span>TOP</span></button>
+
     </main>
     <footer class="footer">
-        
+
         <div class="container">
             <div class="footer_nav_bar">
                 <nav class="footer_nav">
                     <a href="https://www.ksponco.or.kr/" target="_blank">KSPO&CO</a>
-                    <a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000" target="_blank"><strong>개인정보처리방침</strong></a>
+                    <a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000"
+                        target="_blank"><strong>개인정보처리방침</strong></a>
                     <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60601000000">이용약관</a>
                     <a href="https://www.ksponco.or.kr/sports/menu.es?mid=a60505000000">찾아오시는길</a>
-                    <a href="https://chatbot.gov.kt-aicc.com/client/ACTIVE/simulator.html?botCode=GCL-05-C-00000005&channelId=86ab42e0493841d2886422d484dcf18e&userKey=올림픽&callForwardingNumber=" onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;">채팅상담</a>
+                    <a href="https://chatbot.gov.kt-aicc.com/client/ACTIVE/simulator.html?botCode=GCL-05-C-00000005&channelId=86ab42e0493841d2886422d484dcf18e&userKey=올림픽&callForwardingNumber="
+                        onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;">채팅상담</a>
                 </nav>
                 <div class="site_wrap">
-		    <div class="relate_site mr20">
-		        <a href="#" class="title" title="패밀리사이트열기">패밀리사이트<i class="xi-caret-up-min"></i></a>
-		        <ul class="list">
-	<li><a href="https://www.ksponco.or.kr/sports/olparkswim">올림픽수영장</a></li>
-	<li><a href="https://www.ksponco.or.kr/sports/olparktennis">올림픽테니스장</a></li>
-	<li><a href="https://www.ksponco.or.kr/sports/olparksoccer">올팍축구장</a></li>
-	<li><a href="https://www.ksponco.or.kr/sports/ilsansports">일산올림픽스포츠센터</a></li>
-	<li><a href="https://www.ksponco.or.kr/sports/bundangsports">분당올림픽스포츠센터</a></li>
+                    <div class="relate_site mr20">
+                        <a href="#" class="title" title="패밀리사이트열기">패밀리사이트<i class="xi-caret-up-min"></i></a>
+                        <ul class="list">
+                            <li><a href="https://www.ksponco.or.kr/sports/olparkswim">올림픽수영장</a></li>
+                            <li><a href="https://www.ksponco.or.kr/sports/olparktennis">올림픽테니스장</a></li>
+                            <li><a href="https://www.ksponco.or.kr/sports/olparksoccer">올팍축구장</a></li>
+                            <li><a href="https://www.ksponco.or.kr/sports/ilsansports">일산올림픽스포츠센터</a></li>
+                            <li><a href="https://www.ksponco.or.kr/sports/bundangsports">분당올림픽스포츠센터</a></li>
 
-	
-</ul>
-</div>
-<div class="relate_site">
-<a href="#" class="title" title="관련사이트열기">관련사이트<i class="xi-caret-up-min"></i></a>
-	<ul class="list">
-	<li><a href="http://www.kspo.or.kr/" target="_blank" title="새창">국민체육진흥공단</a></li>
-	<li><a href="https://www.mcst.go.kr/kor/main.jsp" target="_blank" title="새창">문화체육관광부</a></li>
-	<li><a href="http://www.kcycle.or.kr/" target="_blank" title="새창">KCYCLE 경륜</a></li>
-	<li><a href="http://www.kboat.or.kr/" target="_blank" title="새창">KBOAT 경정</a></li>
-	<li><a href="https://www.parktel.co.kr/" target="_blank" title="새창">서울올림픽파크텔</a></li>
-	<li><a href="https://www.sports.re.kr/" target="_blank" title="새창">한국스포츠과학원</a></li>
-	<li><a href="https://88olympic.kspo.or.kr/" target="_blank" title="새창">서울올림픽기념관</a></li>
-	<li><a href="https://soma.kspo.or.kr/" target="_blank" title="새창">소마미술관</a></li>
-	<li><a href="https://www.ksponco.or.kr/olympicpark" target="_blank" title="새창">올림픽공원</a></li>
-	<li><a href="https://www.esongpa.or.kr/fmcs/141" target="_blank" title="새창">송파구체육문화회관</a></li>
 
-	
-</ul>
-	</div>
-		</div>
+                        </ul>
+                    </div>
+                    <div class="relate_site">
+                        <a href="#" class="title" title="관련사이트열기">관련사이트<i class="xi-caret-up-min"></i></a>
+                        <ul class="list">
+                            <li><a href="http://www.kspo.or.kr/" target="_blank" title="새창">국민체육진흥공단</a></li>
+                            <li><a href="https://www.mcst.go.kr/kor/main.jsp" target="_blank" title="새창">문화체육관광부</a>
+                            </li>
+                            <li><a href="http://www.kcycle.or.kr/" target="_blank" title="새창">KCYCLE 경륜</a></li>
+                            <li><a href="http://www.kboat.or.kr/" target="_blank" title="새창">KBOAT 경정</a></li>
+                            <li><a href="https://www.parktel.co.kr/" target="_blank" title="새창">서울올림픽파크텔</a></li>
+                            <li><a href="https://www.sports.re.kr/" target="_blank" title="새창">한국스포츠과학원</a></li>
+                            <li><a href="https://88olympic.kspo.or.kr/" target="_blank" title="새창">서울올림픽기념관</a></li>
+                            <li><a href="https://soma.kspo.or.kr/" target="_blank" title="새창">소마미술관</a></li>
+                            <li><a href="https://www.ksponco.or.kr/olympicpark" target="_blank" title="새창">올림픽공원</a>
+                            </li>
+                            <li><a href="https://www.esongpa.or.kr/fmcs/141" target="_blank" title="새창">송파구체육문화회관</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
                 <!-- //relate_site -->
             </div>
             <!-- //footer_nav -->
@@ -824,9 +3324,11 @@
                 </div>
                 <!-- //address_group -->
                 <nav class="sns_list">
-                    <a href="https://www.facebook.com/올림픽공원스포츠센터-253985711314808" target="_blank"><i class="xi-facebook"></i><span class="sr-only">페이스북</span></a>
+                    <a href="https://www.facebook.com/올림픽공원스포츠센터-253985711314808" target="_blank"><i
+                            class="xi-facebook"></i><span class="sr-only">페이스북</span></a>
                     <!-- <a href=""><i class="xi-twitter"></i><span class="sr-only">트위터</span></a> -->
-                    <a href="https://www.youtube.com/channel/UC2IcTdm1tZrg0GSWRBTlQBg" target="_blank"><i class="xi-youtube-play"></i><span class="sr-only">유투브</span></a>
+                    <a href="https://www.youtube.com/channel/UC2IcTdm1tZrg0GSWRBTlQBg" target="_blank"><i
+                            class="xi-youtube-play"></i><span class="sr-only">유투브</span></a>
                 </nav>
                 <!-- //sns_list -->
             </div>
@@ -835,9 +3337,9 @@
             <script type="text/javascript" src="https://www.ksponco.or.kr//wcs.naver.net/wcslog.js"></script>
             <script src="https://www.ksponco.or.kr//wcs.naver.net/wcslog.js"></script>
             <script type="text/javascript">
-                if(!wcs_add) var wcs_add = {};
+                if (!wcs_add) var wcs_add = {};
                 wcs_add["wa"] = "20d75dabc95a940";
-                if(window.wcs) {
+                if (window.wcs) {
                     wcs_do();
                 }
             </script>
@@ -845,14 +3347,17 @@
         <!-- //container -->
 
         <!--올림픽스포츠센터 챗봇상담 플로팅메뉴-->
-        <a href="https://chatbot.ksponco.ieabot.com/sports/olparksports?company=올림픽공원스포츠센터" onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;" title="새창으로 열림" id="chatbot-consult-btn" target="_blank" rel="noopener">
-         <img src="https://www.ksponco.or.kr/sports/img/main/chatbot_sports.png" alt="챗봇상담 아이콘">
-         <span>챗봇상담<span>
+        <a href="https://chatbot.ksponco.ieabot.com/sports/olparksports?company=올림픽공원스포츠센터"
+            onclick="window.open(this.href, '_blank', 'width=420, height=720, scrollbars=1'); return false;"
+            title="새창으로 열림" id="chatbot-consult-btn" target="_blank" rel="noopener">
+            <img src="https://www.ksponco.or.kr/sports/img/main/chatbot_sports.png" alt="챗봇상담 아이콘">
+            <span>챗봇상담<span>
         </a>
 
-    
+
     </footer>
-</div>
+    </div>
 
 </body>
+
 </html>
